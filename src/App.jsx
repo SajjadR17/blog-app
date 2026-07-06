@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
+import SideBar from "./components/SideBar";
 
 function App() {
   return (
@@ -12,7 +13,9 @@ function App() {
             <Route element={<></>} path="/:slug" />
           </Routes>
         </div>
-        <div className="side-bar"></div>
+        <div className="sidebar">
+          <SideBar />
+        </div>
       </main>
     </>
   );

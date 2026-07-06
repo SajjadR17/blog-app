@@ -23,6 +23,7 @@
   color: var(--text-secondary);
   align-items: center;
   gap: 20px;
+  font-size: 14px;
 }
 
 .quick-link {
