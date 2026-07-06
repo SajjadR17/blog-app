@@ -62,17 +62,20 @@ function Journal() {
   }
 
   return (
-    <div className="journal">
-      {journal.map((item) => (
-        <div className="journal" key={item.id}>
-          <span className="journal-eyebrow mono">
-            {item.mood.toUpperCase()}
-          </span>
-          <span className="journal-content body">{item.content}</span>
-          <span className="journal-createdAt mono">{item.date}</span>
-        </div>
-      ))}
-    </div>
+    <>
+      <h1 className="journal-title">Journal</h1>
+      <div className="journal">
+        {journal.map((item) => (
+          <div className="journal" key={item.id}>
+            <span className="journal-eyebrow mono">
+              {item.mood.toUpperCase()}
+            </span>
+            <span className="journal-content body">{item.content}</span>
+            <span className="journal-createdAt mono">{item.date}</span>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
 

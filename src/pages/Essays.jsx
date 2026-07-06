@@ -66,28 +66,31 @@ function Essays() {
   }
 
   return (
-    <div className="essays">
-      {essays.map((essay) => (
-        <div
-          className="essay"
-          onClick={() => navigate(`/assay/${essay.slug}`)}
-          key={essay.id}
-        >
-          <span className="essay-eyebrow mono">
-            {essay.category.toUpperCase()}
-          </span>
-          <h1 className="essay-title display">{essay.title}</h1>
-          <span className="essay-excerpt body">{essay.excerpt}</span>
-          <div className="essay-details mono">
-            <span className="essay-createdAt">{essay.date}</span>
-            <span className="essay-read-mins">
-              <BsClock size={13} />
-              {essay.readMins} Min read
+    <>
+      <h1 className="essays-title">Essays</h1>
+      <div className="essays">
+        {essays.map((essay) => (
+          <div
+            className="essay"
+            onClick={() => navigate(`/assay/${essay.slug}`)}
+            key={essay.id}
+          >
+            <span className="essay-eyebrow mono">
+              {essay.category.toUpperCase()}
             </span>
+            <h1 className="essay-title display">{essay.title}</h1>
+            <span className="essay-excerpt body">{essay.excerpt}</span>
+            <div className="essay-details mono">
+              <span className="essay-createdAt">{essay.date}</span>
+              <span className="essay-read-mins">
+                <BsClock size={13} />
+                {essay.readMins} Min read
+              </span>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </>
   );
 }
 
