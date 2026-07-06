@@ -67,7 +67,7 @@ function Essays() {
 
   return (
     <>
-      <h1 className="essays-title">Essays</h1>
+      <h1 className="essays-title display">Essays</h1>
       <div className="essays">
         {essays.map((essay) => (
           <div

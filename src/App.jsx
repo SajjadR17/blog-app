@@ -4,6 +4,7 @@ import SideBar from "./components/SideBar";
 import Essays from "./pages/Essays";
 import Journal from "./pages/Journal";
 import About from "./pages/About";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route element={<Essays />} path="/essays" />
             <Route element={<Journal />} path="/journal" />
             <Route element={<About />} path="/about" />
+            <Route element={<Login />} path="/login" />
           </Routes>
         </div>
         <div className="sidebar">

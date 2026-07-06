@@ -1,8 +1,8 @@
 import { BiMenu, BiSearch } from "react-icons/bi";
 import { Link, NavLink } from "react-router-dom";
 import "../styles//header.css";
-import { useAuth } from "../hooks/useAuth";
 import { useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);

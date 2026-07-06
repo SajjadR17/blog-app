@@ -1,0 +1,42 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 50px;
+}
+
+form input {
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  caret-color: var(--accent);
+  transition: all 0.2s ease;
+  color: var(--text-primary);
+}
+
+form input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+form button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: none;
+  transition: all 0.2s ease;
+  border-radius: 5px;
+  background-color: var(--accent);
+  color: #fff;
+}
+
+form button:hover {
+  background-color: var(--accent-hover);
+}
+
+@media (max-width:767px) {
+    form{
+        padding: 0;
+    }
+}

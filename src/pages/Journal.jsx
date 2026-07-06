@@ -63,7 +63,7 @@ function Journal() {
 
   return (
     <>
-      <h1 className="journal-title">Journal</h1>
+      <h1 className="journal-title display">Journal</h1>
       <div className="journal">
         {journal.map((item) => (
           <div className="journal" key={item.id}>

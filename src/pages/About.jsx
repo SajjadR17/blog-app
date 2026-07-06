@@ -3,7 +3,7 @@ import "../styles/about.css";
 function About() {
   return (
     <>
-      <h1 className="about-page-title">About</h1>
+      <h1 className="about-page-title display">About</h1>
       <div className="about body">
         <span>
           Ink & Field started as a place to slow down and look twice at ordinary
@@ -21,7 +21,14 @@ function About() {
         <span>Written by Sajjad Roohandeh</span>
         <span>Email: Roohandehsredi6@gmail.com</span>
         <span>
-          Portfolio: <a href="sajjadroohandeh.com">sajjadroohandeh.com</a>
+          Portfolio:{" "}
+          <a
+            target="_blank"
+            href="https://sajjadroohandeh.com"
+            rel="noopener noreferrer"
+          >
+            sajjadroohandeh.com
+          </a>
         </span>
       </div>
     </>
