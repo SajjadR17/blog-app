@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "../styles/essays.css";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../firebase";
-import { BsClock } from "react-icons/bs";
+import { BsClock, BsWifiOff } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { MdErrorOutline } from "react-icons/md";
@@ -51,7 +51,11 @@ function Essays() {
   if (error || (essays && essays.length === 0)) {
     return (
       <div className="essays-error">
-        <MdErrorOutline size={40} color="var(--text-secondary)" />
+        {navigator.onLine ? (
+          <MdErrorOutline size={40} color="var(--text-secondary)" />
+        ) : (
+          <BsWifiOff size={40} color="var(--text-secondary)" />
+        )}
         <span style={{ color: "var(--text-secondary)" }} className="mono">
           {navigator.onLine
             ? "SOMETHING WENT WRONG.CHECK YOUR INTERNET OR TRY AGAIN LATER"

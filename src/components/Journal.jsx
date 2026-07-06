@@ -4,6 +4,7 @@ import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../firebase";
 import { ClipLoader } from "react-spinners";
 import { MdErrorOutline } from "react-icons/md";
+import { BsWifiOff } from "react-icons/bs";
 
 function Journal() {
   const [journal, setJournal] = useState(null);
@@ -46,7 +47,11 @@ function Journal() {
   if (error || (journal && journal.length === 0)) {
     return (
       <div className="journal-error">
-        <MdErrorOutline size={40} color="var(--text-secondary)" />
+        {navigator.onLine ? (
+          <MdErrorOutline size={40} color="var(--text-secondary)" />
+        ) : (
+          <BsWifiOff size={40} color="var(--text-secondary)" />
+        )}
         <span style={{ color: "var(--text-secondary)" }} className="mono">
           {navigator.onLine
             ? "SOMETHING WENT WRONG.CHECK YOUR INTERNET OR TRY AGAIN LATER"
