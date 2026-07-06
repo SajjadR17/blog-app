@@ -1,5 +1,5 @@
 import { BiMenu, BiSearch } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "../styles//header.css";
 import { useAuth } from "../hooks/useAuth";
 import { useState } from "react";
@@ -17,24 +17,24 @@ function Header() {
             ✦ <span>Ink & Field</span>
           </span>
           <div className="quick-links">
-            <Link to={"/essays"} className="quick-link">
+            <NavLink to={"/essays"} className="quick-link">
               ESSAYS
-            </Link>
-            <Link to={"/journal"} className="quick-link">
+            </NavLink>
+            <NavLink to={"/journal"} className="quick-link">
               JOURNAL
-            </Link>
-            <Link to={"/about"} className="quick-link">
+            </NavLink>
+            <NavLink to={"/about"} className="quick-link">
               ABOUT
-            </Link>
+            </NavLink>
             {!user && (
-              <Link to={"/login"} className="quick-link">
+              <NavLink to={"/login"} className="quick-link">
                 LOGIN
-              </Link>
+              </NavLink>
             )}
             {user && (
-              <Link to={"/add-blog"} className="quick-link">
+              <NavLink to={"/add-blog"} className="quick-link">
                 NEW BLOG
-              </Link>
+              </NavLink>
             )}
           </div>
           <div className="nav-right">

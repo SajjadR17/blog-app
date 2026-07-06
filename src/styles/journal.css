@@ -1,0 +1,45 @@
+.journal {
+  display: flex;
+  flex-direction: column;
+}
+
+.journal-loading,
+.journal-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 480px;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.journal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+  padding-right: 10px;
+}
+
+.journal:first-child {
+  padding-top: 0;
+}
+
+.journal:last-child {
+  border-bottom: none;
+}
+
+.journal-eyebrow {
+  color: var(--accent);
+}
+
+.journal-content {
+  font-size: var(--fs-excerpt);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.journal-createdAt{
+    color: var(--accent);
+}

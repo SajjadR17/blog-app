@@ -1,31 +1,26 @@
 import { useEffect, useState } from "react";
-import "../styles/essays.css";
+import "../styles/journal.css";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../firebase";
-import { BsClock } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { MdErrorOutline } from "react-icons/md";
 
-function Essays() {
-  const [essays, setEssays] = useState(null);
+function Journal() {
+  const [journal, setJournal] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchEssays = async () => {
+    const fetchJournal = async () => {
       setLoading(true);
       try {
-        const q = query(collection(db, "posts"), orderBy("date", "desc"));
+        const q = query(collection(db, "journal"), orderBy("date", "desc"));
         const snapshot = await getDocs(q);
         const data = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-        setEssays(data);
-        console.log(db.app.options.projectId);
-        console.log(data);
+        setJournal(data);
       } catch (err) {
         console.log(err);
         setError(true);
@@ -34,23 +29,23 @@ function Essays() {
       }
     };
 
-    fetchEssays();
+    fetchJournal();
   }, []);
 
   if (loading) {
     return (
-      <div className="essays-loading">
+      <div className="journal-loading">
         <ClipLoader color="var(--text-secondary)" size={25} />
         <span style={{ color: "var(--text-secondary)" }} className="mono">
-          LOADING ESSAYS
+          LOADING JOURNAL
         </span>
       </div>
     );
   }
 
-  if (error || (essays && essays.length === 0)) {
+  if (error || (journal && journal.length === 0)) {
     return (
-      <div className="essays-error">
+      <div className="journal-error">
         <MdErrorOutline size={40} color="var(--text-secondary)" />
         <span style={{ color: "var(--text-secondary)" }} className="mono">
           {navigator.onLine
@@ -62,29 +57,18 @@ function Essays() {
   }
 
   return (
-    <div className="essays">
-      {essays.map((essay) => (
-        <div
-          className="essay"
-          onClick={() => navigate(`/assay/${essay.slug}`)}
-          key={essay.id}
-        >
-          <span className="essay-eyebrow mono">
-            {essay.category.toUpperCase()}
+    <div className="journal">
+      {journal.map((item) => (
+        <div className="journal" key={item.id}>
+          <span className="journal-eyebrow mono">
+            {item.mood.toUpperCase()}
           </span>
-          <h1 className="essay-title display">{essay.title}</h1>
-          <span className="essay-excerpt body">{essay.excerpt}</span>
-          <div className="essay-details mono">
-            <span className="essay-createdAt">{essay.date}</span>
-            <span className="essay-read-mins">
-              <BsClock size={13} />
-              {essay.readMins} Min read
-            </span>
-          </div>
+          <span className="journal-content body">{item.content}</span>
+          <span className="journal-createdAt mono">{item.date}</span>
         </div>
       ))}
     </div>
   );
 }
 
-export default Essays;
+export default Journal;

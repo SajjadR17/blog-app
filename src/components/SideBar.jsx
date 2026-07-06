@@ -1,5 +1,6 @@
 import { MdMessage } from "react-icons/md";
 import "../styles/sideBar.css";
+import { BiCoffee, BiCopyright, BiHeart } from "react-icons/bi";
 
 function SideBar() {
   return (
@@ -9,12 +10,13 @@ function SideBar() {
         <span className="body about-content">
           Short essays on paying closer attention to ordinary things, with the
           occasional technical note on software engineering.
-        </span>
-        <span className="body about-content">
-          © 2026 Blog, All Rights Reserved
-        </span>
-        <span className="body about-content">
-          Developed by Sajjad Roohandeh with Love
+          <span>
+            2026 Blog, All Rights Reserved
+            <BiCopyright />
+          </span>
+          <span>
+            Developed by Sajjad Roohandeh with <BiHeart /> and <BiCoffee />
+          </span>
         </span>
       </div>
       <div className="categories">
@@ -42,8 +44,7 @@ function SideBar() {
       </div>
       <div className="newsletter">
         <span className="mono newsletter-title">
-          <MdMessage />
-          ONE LETTER A WEEK
+          GET NEWEST POSTS
         </span>
         <span className="body newsletter-content">
           No noise, no archive dump - just the newest post.

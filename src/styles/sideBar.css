@@ -1,18 +1,25 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 50px;
   border-left: 1px solid var(--border);
   padding: 0 20px;
   height: 100%;
+  position: static;
+  top: 50px;
 }
 
 .sidebar-about,
-.categories,
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 .newsletter {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
 }
 
 .about-content,
@@ -22,22 +29,28 @@
   font-size: 14px;
 }
 
+.about-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-content span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .about-title,
 .categories-title,
 .newsletter-title {
   font-size: 12px;
 }
 
-.newsletter {
-  background-color: var(--bg-card);
-  padding: 20px;
-  border-radius: 5px;
-}
-
 .newsletter-title {
   display: flex;
   align-items: center;
   gap: 5px;
+  padding-bottom: 15px;
 }
 
 .newsletter input {

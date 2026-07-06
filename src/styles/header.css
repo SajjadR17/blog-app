@@ -24,6 +24,7 @@
   align-items: center;
   gap: 20px;
   font-size: 14px;
+  transition: all 0.2s ease;
 }
 
 .quick-link {
@@ -31,8 +32,9 @@
   cursor: pointer;
 }
 
-.quick-link:hover {
-  color: var(--text-primary);
+.quick-link.active{
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
 }
 
 .search-icon,
