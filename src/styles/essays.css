@@ -1,0 +1,66 @@
+.essays {
+  display: flex;
+  flex-direction: column;
+}
+
+.essays-loading,
+.essays-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 480px;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.essay {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 10px;
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
+  padding-right: 10px;
+}
+
+.essay:first-child {
+  padding-top: 0;
+}
+
+.essay:last-child {
+  border-bottom: none;
+}
+
+.essay-eyebrow {
+  color: var(--accent);
+}
+
+.essay-title {
+  font-size: var(--fs-h2);
+}
+
+.essay-excerpt {
+  font-size: var(--fs-excerpt);
+  color: var(--text-secondary);
+}
+
+.essay-details {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: var(--accent);
+}
+
+.essay-read-mins {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+@media (max-width: 767px) {
+  .essay-title {
+    white-space: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+}

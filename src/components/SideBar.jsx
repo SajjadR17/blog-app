@@ -10,6 +10,12 @@ function SideBar() {
           Short essays on paying closer attention to ordinary things, with the
           occasional technical note on software engineering.
         </span>
+        <span className="body about-content">
+          © 2026 Blog, All Rights Reserved
+        </span>
+        <span className="body about-content">
+          Developed by Sajjad Roohandeh with Love
+        </span>
       </div>
       <div className="categories">
         <span className="mono categories-title">CATEGORIES</span>

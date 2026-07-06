@@ -85,9 +85,10 @@
   background: var(--accent2);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 900px) {
   .sidebar {
     border-left: none;
-    padding: 0;
+    border-top: 2px solid #8a887e;
+    padding: 20px 0;
   }
 }
