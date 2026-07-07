@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import "../styles//header.css";
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import { logout } from "../lib/auth";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -35,6 +36,11 @@ function Header() {
               <NavLink to={"/add-blog"} className="quick-link">
                 NEW BLOG
               </NavLink>
+            )}
+            {user && (
+              <button onClick={() => logout()} className="quick-link">
+                LOGOUT
+              </button>
             )}
           </div>
           <div className="nav-right">

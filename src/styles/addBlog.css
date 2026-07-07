@@ -1,0 +1,92 @@
+.add-blog-title {
+  margin-bottom: 50px;
+  color: var(--accent);
+}
+
+.add-blog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.add-blog-form input {
+  padding: 10px;
+  font-size: 14px;
+  caret-color: var(--accent);
+  border-radius: 5px;
+  border: 1px solid var(--accent);
+}
+
+.add-blog-form input:focus {
+  outline: none;
+}
+
+.add-blog-form input::placeholder {
+  color: var(--text-secondary);
+}
+
+.add-blog-form textarea {
+  padding: 10px;
+  font-size: 14px;
+  caret-color: var(--accent);
+  border-radius: 5px;
+  height: 100px;
+  resize: none;
+  border: 1px solid var(--accent);
+}
+
+.add-blog-form textarea:focus {
+  outline: none;
+}
+
+.add-blog-form textarea::placeholder {
+  color: var(--text-secondary);
+}
+
+.input-err {
+  font-size: 12px;
+  color: red;
+}
+
+.required-star {
+  color: red;
+}
+
+.parsed-tags {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.parsed-tag {
+  display: flex;
+  align-items: center;
+  justify-content: baseline;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  background-color: var(--bg-card);
+}
+
+.add-blog-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.add-blog-form button {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent);
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  transition: all 0.2s ease;
+}
+
+.add-blog-form button:hover {
+  background-color: var(--accent-hover);
+}

@@ -1,0 +1,80 @@
+.essay {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.essay-category {
+  color: var(--accent);
+  margin-top: 30px;
+}
+
+.writer-profile-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.writer-profile-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.writer-profile-img {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  background-color: var(--accent);
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.essay-micro-details {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.writer-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.essay-body{
+    text-align: justify;
+}
+
+.essay-body::first-letter {
+  font-size: 3rem;
+  line-height: 0.8;
+  font-weight: bold;
+  float: left;
+  margin-right: 10px;
+  color: var(--accent);
+  margin-top: 7px;
+}
+
+.essay-tags {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tag{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--bg-card);
+    font-size: 12px;
+}

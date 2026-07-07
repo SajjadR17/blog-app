@@ -24,8 +24,6 @@ function Essays() {
           ...doc.data(),
         }));
         setEssays(data);
-        console.log(db.app.options.projectId);
-        console.log(data);
       } catch (err) {
         console.log(err);
         setError(true);
@@ -72,7 +70,7 @@ function Essays() {
         {essays.map((essay) => (
           <div
             className="essay"
-            onClick={() => navigate(`/assay/${essay.slug}`)}
+            onClick={() => navigate(`/essay/${essay.slug}`)}
             key={essay.id}
           >
             <span className="essay-eyebrow mono">

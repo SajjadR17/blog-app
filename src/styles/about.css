@@ -26,9 +26,3 @@
         padding-right: 0;
     }
 }
-
-@media (max-width:400px) {
-    .about span{
-        text-align: left;
-    }
-}
