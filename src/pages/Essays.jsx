@@ -81,7 +81,7 @@ function Essays() {
             <div className="essay-details mono">
               <span className="essay-createdAt">{essay.date}</span>
               <span className="essay-read-mins">
-                <BsClock size={13} />
+                <BsClock size={12} />
                 {essay.readMins} Min read
               </span>
             </div>

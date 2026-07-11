@@ -6,20 +6,77 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { ClipLoader } from "react-spinners";
 
+function loadDraft() {
+  try {
+    const saved = localStorage.getItem("addBlogDraft");
+    return saved ? JSON.parse(saved) : null;
+  } catch {
+    return null;
+  }
+}
+
+const savedDraft = loadDraft();
+
 function AddBlog() {
-  const [excerptValue, setExcerptValue] = useState("");
-  const [textValue, setTextValue] = useState("");
-  const [titleValue, setTitleValue] = useState("");
-  const [slugValue, setSlugValue] = useState("");
-  const [categoryValue, setCategoryValue] = useState("");
-  const [readMinsValue, setReadMinsValue] = useState("");
-  const [parsedTags, setParsedTags] = useState([]);
-  const [tagsValue, setTagsValue] = useState("");
+  const [excerptValue, setExcerptValue] = useState(
+    savedDraft?.excerptValue || "",
+  );
+  const [textValue, setTextValue] = useState(savedDraft?.textValue || "");
+  const [titleValue, setTitleValue] = useState(savedDraft?.titleValue || "");
+  const [slugValue, setSlugValue] = useState(savedDraft?.slugValue || "");
+  const [categoryValue, setCategoryValue] = useState(
+    savedDraft?.categoryValue || "",
+  );
+  const [readMinsValue, setReadMinsValue] = useState(
+    savedDraft?.readMinsValue || "",
+  );
+  const [tagsValue, setTagsValue] = useState(savedDraft?.tagsValue || "");
+  const [parsedTags, setParsedTags] = useState(() =>
+    savedDraft?.tagsValue
+      ? savedDraft.tagsValue
+          .split(",")
+          .map((t) => t.trim())
+          .filter((t) => t.length > 0)
+      : [],
+  );
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const date = new Date().toISOString().split("T")[0];
   const navigate = useNavigate();
   const { user } = useAuth();
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/essays");
+    }
+  }, [navigate, user]);
+
+  useEffect(() => {
+    const draft = {
+      excerptValue,
+      textValue,
+      titleValue,
+      slugValue,
+      categoryValue,
+      readMinsValue,
+      tagsValue,
+    };
+
+    const isEmpty = Object.values(draft).every((v) => v.length === 0);
+    if (isEmpty) {
+      localStorage.removeItem("addBlogDraft");
+    } else {
+      localStorage.setItem("addBlogDraft", JSON.stringify(draft));
+    }
+  }, [
+    excerptValue,
+    textValue,
+    titleValue,
+    slugValue,
+    categoryValue,
+    readMinsValue,
+    tagsValue,
+  ]);
 
   useEffect(() => {
     if (error) {
@@ -33,12 +90,6 @@ function AddBlog() {
     };
   }, [error]);
 
-  useEffect(() => {
-    if (!user) {
-      navigate("/essays");
-    }
-  }, [navigate, user]);
-
   function parseTags(input) {
     setParsedTags(
       input
@@ -46,6 +97,10 @@ function AddBlog() {
         .map((tag) => tag.trim())
         .filter((tag) => tag.length > 0),
     );
+  }
+
+  function clearDraft() {
+    localStorage.removeItem("addBlogDraft");
   }
 
   async function handleSubmit(e) {
@@ -89,6 +144,7 @@ function AddBlog() {
         id: crypto.randomUUID(),
       });
 
+      clearDraft();
       navigate("/essays");
     } catch (err) {
       console.log(err);
@@ -110,7 +166,7 @@ function AddBlog() {
       )}
       <div className={`overlay ${error.length > 0 ? "active" : null}`}></div>
       <div className="add-blog">
-        <h1 className="add-blog-title display">Add Blog</h1>
+        <h1 className="add-blog-title display">Add Post</h1>
         <form onSubmit={handleSubmit} className="add-blog-form">
           <div className="add-blog-input-container">
             <span className="mono">Author</span>

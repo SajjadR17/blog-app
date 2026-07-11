@@ -34,7 +34,7 @@ function Header() {
             )}
             {user && (
               <NavLink to={"/add-blog"} className="quick-link">
-                NEW BLOG
+                NEW POST
               </NavLink>
             )}
             {user && (
@@ -127,8 +127,13 @@ function Header() {
                 onClick={() => setMenuOpen(false)}
                 className="menu-link"
               >
-                NEW BLOG
+                NEW POST
               </Link>
+            )}
+            {user && (
+              <button onClick={() => logout()} className="menu-link">
+                LOGOUT
+              </button>
             )}
           </div>
           {user && (
