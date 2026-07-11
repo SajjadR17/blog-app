@@ -22,6 +22,18 @@ function AddBlog() {
   const { user } = useAuth();
 
   useEffect(() => {
+    if (error) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [error]);
+
+  useEffect(() => {
     if (!user) {
       navigate("/essays");
     }
@@ -38,6 +50,7 @@ function AddBlog() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setSaving(true);
 
     if (
       excerptValue.length === 0 ||
@@ -48,6 +61,7 @@ function AddBlog() {
       tagsValue.length === 0
     ) {
       setError("Please fill in all fields.");
+      setSaving(false);
       return;
     }
 
@@ -56,10 +70,10 @@ function AddBlog() {
       setError(
         "A post with this slug already exists. Please choose a different title.",
       );
+      setSaving(false);
       return;
     }
 
-    setSaving(true);
     try {
       await setDoc(doc(db, "posts", slugValue), {
         title: titleValue,

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "../styles/essayDetailsPage.css";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
@@ -13,6 +13,7 @@ function EssayDetailsPage() {
   const [essayDetails, setEssayDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEssay = async () => {
@@ -70,7 +71,7 @@ function EssayDetailsPage() {
 
   return (
     <div className="essay">
-      <div onClick={() => history.back()} className="back-btn mono">
+      <div onClick={() => navigate("/essays")} className="back-btn mono">
         <BsArrowLeft /> BACK TO ESSAYS
       </div>
       <span className="essay-category mono">{essayDetails.category}</span>

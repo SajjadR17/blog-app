@@ -49,8 +49,10 @@
   font-weight: 600;
 }
 
-.essay-body{
-    text-align: justify;
+.essay-body {
+  text-align: justify;
+  text-align-last: left;
+  hyphens: auto;
 }
 
 .essay-body::first-letter {
@@ -69,12 +71,12 @@
   gap: 10px;
 }
 
-.tag{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: var(--bg-card);
-    font-size: 12px;
+.tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--bg-card);
+  font-size: 12px;
 }
