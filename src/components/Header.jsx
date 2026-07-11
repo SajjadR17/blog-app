@@ -9,7 +9,7 @@ import { useTheme } from "../contexts/ThemeContext";
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const { user } = useAuth();
+  const { user, userProfile } = useAuth();
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -34,7 +34,7 @@ function Header() {
                 LOGIN
               </NavLink>
             )}
-            {user && (
+            {user && userProfile.role === "admin" && (
               <NavLink to={"/add-blog"} className="quick-link">
                 NEW POST
               </NavLink>
@@ -138,7 +138,7 @@ function Header() {
                 LOGIN
               </Link>
             )}
-            {user && (
+            {user && userProfile.role === "admin" && (
               <Link
                 to={"/add-blog"}
                 onClick={() => setMenuOpen(false)}
@@ -159,10 +159,10 @@ function Header() {
           </div>
           {user && (
             <div className="menu-profile-card">
-              <div className="profile-img">SR</div>
+              <div className="profile-img">{userProfile.shortName}</div>
               <div className="profile-info">
-                <span className="username">Sajjad Roohandeh</span>
-                <span className="userRole">Admin</span>
+                <span className="username">{userProfile.username}</span>
+                <span className="userRole">{userProfile.role}</span>
               </div>
             </div>
           )}

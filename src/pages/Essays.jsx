@@ -6,6 +6,7 @@ import { BsClock, BsWifiOff } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { MdErrorOutline } from "react-icons/md";
+import { BiHeart } from "react-icons/bi";
 
 function Essays() {
   const [essays, setEssays] = useState(null);
@@ -83,6 +84,10 @@ function Essays() {
               <span className="essay-read-mins">
                 <BsClock size={12} />
                 {essay.readMins} Min read
+              </span>
+              <span className="essay-card-likes">
+                <BiHeart size={12} />
+                {essay.likes}
               </span>
             </div>
           </div>

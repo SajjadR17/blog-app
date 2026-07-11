@@ -60,8 +60,8 @@ main {
   --bg-card: #2a2722;
   --text-primary: #ede9e1;
   --text-secondary: #a8a296;
-  --accent: #8fb380;
-  --accent-rgb: 143, 179, 128; 
+  --accent: #779469;
+  --accent-rgb: 143, 179, 128;
   --accent-hover: #a3c494;
   --accent2: #c68b5c;
   --line: #3a362f;
@@ -81,6 +81,16 @@ main {
 .mono {
   font-family: var(--font-mono);
   font-size: var(--fs-meta);
+}
+
+::selection {
+  background-color: var(--accent);
+  color: #fff;
+}
+
+::-moz-selection {
+  background-color: var(--accent);
+  color: #fff;
 }
 
 body {

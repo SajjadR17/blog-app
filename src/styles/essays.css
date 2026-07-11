@@ -55,7 +55,8 @@
   color: var(--accent);
 }
 
-.essay-read-mins {
+.essay-read-mins,
+.essay-card-likes {
   display: flex;
   align-items: center;
   gap: 5px;

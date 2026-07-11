@@ -1,12 +1,20 @@
 import { useNavigate, useParams } from "react-router-dom";
 import "../styles/essayDetailsPage.css";
 import { useEffect, useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../firebase";
-import { BiArrowToLeft } from "react-icons/bi";
+import {
+  arrayRemove,
+  arrayUnion,
+  doc,
+  increment,
+  onSnapshot,
+  writeBatch,
+} from "firebase/firestore";
+import { auth, db } from "../../firebase";
+import { BiArrowToLeft, BiHeart, BiSolidHeart } from "react-icons/bi";
 import { BsArrowLeft, BsClock, BsWifiOff } from "react-icons/bs";
 import { ClipLoader } from "react-spinners";
 import { MdErrorOutline } from "react-icons/md";
+import { useAuth } from "../contexts/AuthContext";
 
 function EssayDetailsPage() {
   const { slug } = useParams();
@@ -14,32 +22,49 @@ function EssayDetailsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
+  const { userProfile } = useAuth();
+  const isLiked = userProfile?.liked?.includes(essayDetails?.slug) || false;
 
   useEffect(() => {
-    const fetchEssay = async () => {
-      try {
-        const docRef = doc(db, "posts", slug);
-        const docSnap = await getDoc(docRef);
+    const docRef = doc(db, "posts", slug);
 
-        if (docSnap.exists()) {
-          setEssayDetails({
-            id: docSnap.id,
-            ...docSnap.data(),
-          });
-        } else {
-          setError(true);
-        }
-      } catch (err) {
-        console.error(err);
+    const unsubscribe = onSnapshot(docRef, (docSnap) => {
+      if (docSnap.exists()) {
+        setEssayDetails({
+          id: docSnap.id,
+          ...docSnap.data(),
+        });
+      } else {
         setError(true);
-        setEssayDetails(null);
-      } finally {
-        setLoading(false);
       }
-    };
 
-    fetchEssay();
+      setLoading(false);
+    });
+
+    return unsubscribe;
   }, [slug]);
+
+  async function toggleLike() {
+    const user = auth.currentUser;
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    const userRef = doc(db, "users", user.uid);
+    const postRef = doc(db, "posts", essayDetails.slug);
+
+    const batch = writeBatch(db);
+
+    if (isLiked) {
+      batch.update(userRef, { liked: arrayRemove(essayDetails.slug) });
+      batch.update(postRef, { likes: increment(-1) });
+    } else {
+      batch.update(userRef, { liked: arrayUnion(essayDetails.slug) });
+      batch.update(postRef, { likes: increment(1) });
+    }
+
+    await batch.commit();
+  }
 
   if (loading) {
     return (
@@ -62,7 +87,7 @@ function EssayDetailsPage() {
         )}
         <span style={{ color: "var(--text-secondary)" }} className="mono">
           {navigator.onLine
-            ? "SOMETHING WENT WRONG.CHECK YOUR INTERNET OR TRY AGAIN LATER"
+            ? "SOMETHING WENT WRONG."
             : "CHECK YOUR INTERNET CONNECTION"}
         </span>
       </div>
@@ -92,10 +117,32 @@ function EssayDetailsPage() {
         </div>
       </div>
       <span className="essay-body body">{essayDetails.body}</span>
-      <div className="essay-tags mono">
-        {essayDetails.tags.map((tag) => (
-          <div className="tag">{tag.toUpperCase()}</div>
-        ))}
+      <div className="essay-bottom">
+        <div className="essay-tags mono">
+          {essayDetails.tags.map((tag, i) => (
+            <div className="tag" key={i}>
+              {tag.toUpperCase()}
+            </div>
+          ))}
+        </div>
+        <div className="essay-likes mono">
+          {isLiked ? (
+            <BiSolidHeart
+              onClick={() => toggleLike()}
+              cursor={"pointer"}
+              size={20}
+              color="var(--accent)"
+            />
+          ) : (
+            <BiHeart
+              onClick={() => toggleLike()}
+              cursor={"pointer"}
+              size={20}
+              color="var(--accent)"
+            />
+          )}
+          {essayDetails.likes}
+        </div>
       </div>
     </div>
   );

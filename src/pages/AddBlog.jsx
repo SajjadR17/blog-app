@@ -43,13 +43,13 @@ function AddBlog() {
   const [error, setError] = useState("");
   const date = new Date().toISOString().split("T")[0];
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, userProfile } = useAuth();
 
   useEffect(() => {
-    if (!user) {
+    if (!user || userProfile.role !== "admin") {
       navigate("/essays");
     }
-  }, [navigate, user]);
+  }, [navigate, user, userProfile]);
 
   useEffect(() => {
     const draft = {
@@ -139,6 +139,7 @@ function AddBlog() {
         authorInitials: "SR",
         category: categoryValue,
         tags: parsedTags,
+        likes: 0,
         readMins: Number(readMinsValue),
         date: date,
         id: crypto.randomUUID(),

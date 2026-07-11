@@ -1,21 +1,45 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { ClipLoader } from "react-spinners";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [checkingAuth, setCheckingAuth] = useState(true);
+  const [userProfile, setUserProfile] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    let unsubscribeProfile = null;
+
+    const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setCheckingAuth(false);
+
+      if (unsubscribeProfile) {
+        unsubscribeProfile();
+        unsubscribeProfile = null;
+      }
+
+      if (currentUser) {
+        unsubscribeProfile = onSnapshot(
+          doc(db, "users", currentUser.uid),
+          (snap) => {
+            setUserProfile(snap.exists() ? snap.data() : null);
+            setCheckingAuth(false);
+          },
+        );
+      } else {
+        setUserProfile(null);
+        setCheckingAuth(false);
+      }
     });
 
-    return unsubscribe;
+    return () => {
+      unsubscribeAuth();
+      if (unsubscribeProfile) unsubscribeProfile();
+    };
   }, []);
 
   if (checkingAuth) {
@@ -30,7 +54,9 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, userProfile }}>
+      {children}
+    </AuthContext.Provider>
   );
 }
 

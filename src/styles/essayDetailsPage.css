@@ -66,10 +66,23 @@
   margin-top: 7px;
 }
 
+.essay-bottom{
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
 .essay-tags {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.essay-likes {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
 }
 
 .tag {
