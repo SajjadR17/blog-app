@@ -56,7 +56,7 @@ function Essays() {
         )}
         <span style={{ color: "var(--text-secondary)" }} className="mono">
           {navigator.onLine
-            ? "SOMETHING WENT WRONG.CHECK YOUR INTERNET OR TRY AGAIN LATER"
+            ? "SOMETHING WENT WRONG."
             : "CHECK YOUR INTERNET CONNECTION"}
         </span>
       </div>
