@@ -148,9 +148,13 @@ function Header() {
               </Link>
             )}
             {user && (
-              <button onClick={() => logout()} className="menu-link">
+              <Link
+                to={"/essay"}
+                onClick={() => logout()}
+                className="menu-link"
+              >
                 LOGOUT
-              </button>
+              </Link>
             )}
           </div>
           {user && (
