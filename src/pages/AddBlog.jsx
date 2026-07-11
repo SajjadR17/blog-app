@@ -170,7 +170,7 @@ function AddBlog() {
         <form onSubmit={handleSubmit} className="add-blog-form">
           <div className="add-blog-input-container">
             <span className="mono">Author</span>
-            <input type="text" value={"Sajjad Roohandeh"} disabled />
+            <input type="text" placeholder={"Sajjad Roohandeh"} disabled />
           </div>
           <div className="add-blog-input-container">
             <span className="mono">
@@ -191,7 +191,6 @@ function AddBlog() {
               }}
               value={titleValue}
             />
-            <span className="mono input-err"></span>
           </div>
           <div className="add-blog-input-container">
             <span className="mono">Slug</span>
@@ -202,7 +201,6 @@ function AddBlog() {
               placeholder="auto-generated-from-title"
               disabled
             />
-            <span className="mono input-err"></span>
           </div>
           <div className="add-blog-input-container">
             <span className="mono">
@@ -215,7 +213,6 @@ function AddBlog() {
               onChange={(e) => setExcerptValue(e.target.value)}
               value={excerptValue}
             />
-            <span className="mono input-err"></span>
           </div>
           <div className="add-blog-input-container">
             <span className="mono">
@@ -228,7 +225,6 @@ function AddBlog() {
               onChange={(e) => setTextValue(e.target.value)}
               value={textValue}
             />
-            <span className="mono input-err"></span>
           </div>
           <div className="add-blog-input-container">
             <span className="mono">
@@ -241,7 +237,6 @@ function AddBlog() {
               onChange={(e) => setCategoryValue(e.target.value)}
               value={categoryValue}
             />
-            <span className="mono input-err"></span>
           </div>
           <div className="add-blog-input-container">
             <span className="mono">
@@ -254,7 +249,6 @@ function AddBlog() {
               onChange={(e) => setReadMinsValue(e.target.value)}
               value={readMinsValue}
             />
-            <span className="mono input-err"></span>
           </div>
           <div className="add-blog-input-container">
             <span className="mono">
@@ -277,7 +271,6 @@ function AddBlog() {
                 </div>
               ))}
             </div>
-            <span className="mono input-err"></span>
           </div>
           <button className="publish-post-btn" type="submit">
             {saving ? <ClipLoader size={20} color="#fff" /> : "Publish"}

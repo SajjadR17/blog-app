@@ -1,14 +1,16 @@
-import { BiMenu, BiSearch } from "react-icons/bi";
+import { BiMenu, BiMoon, BiSearch, BiSun } from "react-icons/bi";
 import { Link, NavLink } from "react-router-dom";
 import "../styles//header.css";
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { logout } from "../lib/auth";
+import { useTheme } from "../contexts/ThemeContext";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const { user } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <>
@@ -61,6 +63,21 @@ function Header() {
               </div>
             ) : (
               <>
+                {theme === "light" ? (
+                  <BiMoon
+                    size={20}
+                    cursor={"pointer"}
+                    onClick={toggleTheme}
+                    className="theme-icon"
+                  />
+                ) : (
+                  <BiSun
+                    size={20}
+                    cursor={"pointer"}
+                    onClick={toggleTheme}
+                    className="theme-icon"
+                  />
+                )}
                 <BiSearch
                   className="search-icon"
                   size={20}

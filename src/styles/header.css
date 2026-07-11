@@ -41,13 +41,15 @@
 }
 
 .search-icon,
-.menu-icon {
+.menu-icon,
+.theme-icon {
   transition: all 0.2s ease;
   color: var(--text-secondary);
 }
 
 .search-icon:hover,
-.menu-icon:hover {
+.menu-icon:hover,
+.theme-icon:hover {
   color: var(--text-primary);
 }
 

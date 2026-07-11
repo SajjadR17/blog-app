@@ -15,9 +15,9 @@
 
 .login-form input {
   padding: 10px;
-  border: 1px solid var(--accent);
+  border: 1px solid var(--text-secondary);
+  background-color: var(--bg-primary);
   border-radius: 5px;
-  background-color: transparent;
   caret-color: var(--accent);
   transition: all 0.2s ease;
   color: var(--text-primary);

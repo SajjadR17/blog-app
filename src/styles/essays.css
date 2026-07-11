@@ -18,21 +18,20 @@
   gap: 30px;
 }
 
-.essay {
+.essay-card {
   display: flex;
   flex-direction: column;
   cursor: pointer;
   gap: 10px;
   border-bottom: 1px solid var(--border);
-  padding: 20px 0;
-  padding-right: 10px;
+  padding: 30px 0;
 }
 
-.essay:first-child {
+.essay-card:first-child {
   padding-top: 0;
 }
 
-.essay:last-child {
+.essay-card:last-child {
   border-bottom: none;
 }
 

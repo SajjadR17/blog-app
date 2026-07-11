@@ -24,7 +24,6 @@
   gap: 10px;
   border-bottom: 1px solid var(--border);
   padding: 20px 0;
-  padding-right: 10px;
 }
 
 .journal:first-child {

@@ -69,7 +69,7 @@ function Essays() {
       <div className="essays">
         {essays.map((essay) => (
           <div
-            className="essay"
+            className="essay-card"
             onClick={() => navigate(`/essay/${essay.slug}`)}
             key={essay.id}
           >

@@ -33,6 +33,7 @@ main {
   --text-primary: #221f1b;
   --text-secondary: #57534a;
   --accent: #4b5d45;
+  --accent-rgb: 75, 93, 69;
   --accent-hover: #597350;
   --accent2: #9c6b45;
   --line: #dedacb;
@@ -53,6 +54,19 @@ main {
   --container-width: 1200px;
 }
 
+[data-theme="dark"] {
+  --border: #3a362f;
+  --bg-primary: #1c1a17;
+  --bg-card: #2a2722;
+  --text-primary: #ede9e1;
+  --text-secondary: #a8a296;
+  --accent: #8fb380;
+  --accent-rgb: 143, 179, 128; 
+  --accent-hover: #a3c494;
+  --accent2: #c68b5c;
+  --line: #3a362f;
+}
+
 .display {
   font-family: var(--font-display);
 }
@@ -61,6 +75,7 @@ main {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
+  transition: all 0.3s ease;
 }
 
 .mono {
