@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import EssayDetailsPage from "./pages/EssayDetailsPage";
 import AddBlog from "./pages/AddBlog";
 import Signup from "./pages/Signup";
+import Footer from "./components/Footer";
 
 function App() {
   return (

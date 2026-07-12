@@ -5,10 +5,14 @@
   height: 70vh;
 }
 
+.login-form h1{
+  margin-bottom: 20px;
+}
+
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   padding: 30px;
   width: 50%;
 }
@@ -77,9 +81,7 @@
 }
 
 .login-links{
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+  margin: 5px 0;
 }
 
 .login-links p{

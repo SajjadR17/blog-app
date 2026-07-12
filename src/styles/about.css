@@ -3,6 +3,30 @@
   color: var(--accent);
 }
 
+.about-social {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.social-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.social-icon:hover {
+  border-color: var(--accent2);
+  color: var(--accent2);
+  background: var(--bg-card);
+}
+
 .about {
   display: flex;
   flex-direction: column;

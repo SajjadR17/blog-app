@@ -1,9 +1,37 @@
+import { BiEnvelope, BiGlobe, BiLogoGithub } from "react-icons/bi";
 import "../styles/about.css";
 
 function About() {
   return (
     <>
       <h1 className="about-page-title display">About</h1>
+      <div className="about-social">
+        <a
+          href="mailto:Roohandehsredi6@gmail.com"
+          aria-label="Email"
+          className="social-icon"
+        >
+          <BiEnvelope size={18} />
+        </a>
+        <a
+          href="https://sajjadroohandeh.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Portfolio"
+          className="social-icon"
+        >
+          <BiGlobe size={18} />
+        </a>
+        <a
+          href="https://github.com/sajjadroohandeh"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+          className="social-icon"
+        >
+          <BiLogoGithub size={18} />
+        </a>
+      </div>
       <div className="about body">
         <span>
           Ink & Field started as a place to slow down and look twice at ordinary
@@ -19,17 +47,6 @@ function About() {
           moment before it's argued with.
         </span>
         <span>Written by Sajjad Roohandeh</span>
-        <span>Email: Roohandehsredi6@gmail.com</span>
-        <span>
-          Portfolio:{" "}
-          <a
-            target="_blank"
-            href="https://sajjadroohandeh.com"
-            rel="noopener noreferrer"
-          >
-            sajjadroohandeh.com
-          </a>
-        </span>
       </div>
     </>
   );

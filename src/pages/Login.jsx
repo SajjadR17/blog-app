@@ -96,7 +96,6 @@ function Login() {
             <p className="mono signup-link">
               <Link to={"/signup"}>Dont have an account ? SIGNUP</Link>
             </p>
-            <p className="mono forgot-pass-link">Forgot password ? RESTORE</p>
           </div>
           <button className="login-btn" type="submit">
             {loading ? <ClipLoader size={20} color="#fff" /> : "Login"}
