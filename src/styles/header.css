@@ -106,8 +106,14 @@
 }
 
 .close-menu-btn,
-.close-search-input {
+.close-search-btn {
   cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.close-search-btn{
+  color: var(--text-secondary);
 }
 
 .menu {
@@ -206,7 +212,7 @@
     display: none;
   }
 
-  .sajjad-nav.search-open {
+  .nav.search-open {
     display: block;
   }
 

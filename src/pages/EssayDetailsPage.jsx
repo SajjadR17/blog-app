@@ -126,7 +126,7 @@ function EssayDetailsPage() {
           ))}
         </div>
         <button className="like-btn" onClick={toggleLike}>
-          {isLiked ? <BiSolidHeart size={16} /> : <BiHeart size={16} />}
+          {isLiked ? <BiSolidHeart size={15} /> : <BiHeart size={15} />}
           <span className="mono like-count">{essayDetails.likes}</span>
         </button>
       </div>

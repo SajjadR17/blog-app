@@ -63,13 +63,13 @@
   float: left;
   margin-right: 10px;
   color: var(--accent);
-  margin-top: 7px;
+  margin-top: 10px;
 }
 
 .essay-bottom {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 10px;
 }
 
 .essay-tags {
@@ -82,7 +82,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 8px 16px;
+  padding: 10px 16px;
   border-radius: 5px;
   border: 1px solid var(--border);
   background: var(--bg-card);

@@ -56,7 +56,7 @@ function Header() {
                 />
                 <button
                   onClick={() => setSearchOpen(false)}
-                  className="close-search-input"
+                  className="close-search-btn"
                   aria-label="Close search"
                 >
                   ✖
