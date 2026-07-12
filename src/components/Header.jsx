@@ -1,6 +1,6 @@
 import { BiMenu, BiMoon, BiSearch, BiSun } from "react-icons/bi";
 import { Link, NavLink } from "react-router-dom";
-import "../styles//header.css";
+import "../styles/header.css";
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { logout } from "../lib/auth";
@@ -15,7 +15,7 @@ function Header() {
   return (
     <>
       <header>
-        <nav className={`sajjad-nav body ${searchOpen ? "search-open" : null}`}>
+        <nav className={`nav body ${searchOpen ? "search-open" : null}`}>
           <span className={`logo ${searchOpen ? "search-open" : null}`}>
             ✦ <span>Ink & Field</span>
           </span>
@@ -34,7 +34,7 @@ function Header() {
                 LOGIN
               </NavLink>
             )}
-            {user && userProfile.role === "admin" && (
+            {user && userProfile?.role === "admin" && (
               <NavLink to={"/add-blog"} className="quick-link">
                 NEW POST
               </NavLink>
@@ -54,12 +54,13 @@ function Header() {
                   className="search-input"
                   placeholder="Search a blog title"
                 />
-                <span
+                <button
                   onClick={() => setSearchOpen(false)}
                   className="close-search-input"
+                  aria-label="Close search"
                 >
                   ✖
-                </span>
+                </button>
               </div>
             ) : (
               <>
@@ -149,8 +150,11 @@ function Header() {
             )}
             {user && (
               <Link
-                to={"/essay"}
-                onClick={() => logout()}
+                to={"/essays"}
+                onClick={() => {
+                  logout();
+                  setMenuOpen(false);
+                }}
                 className="menu-link"
               >
                 LOGOUT
@@ -159,10 +163,10 @@ function Header() {
           </div>
           {user && (
             <div className="menu-profile-card">
-              <div className="profile-img">{userProfile.shortName}</div>
+              <div className="profile-img">{userProfile?.shortName}</div>
               <div className="profile-info">
-                <span className="username">{userProfile.username}</span>
-                <span className="userRole">{userProfile.role}</span>
+                <span className="username">{userProfile?.username}</span>
+                <span className="userRole">{userProfile?.role}</span>
               </div>
             </div>
           )}

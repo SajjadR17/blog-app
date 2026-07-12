@@ -125,24 +125,10 @@ function EssayDetailsPage() {
             </div>
           ))}
         </div>
-        <div className="essay-likes mono">
-          {isLiked ? (
-            <BiSolidHeart
-              onClick={() => toggleLike()}
-              cursor={"pointer"}
-              size={20}
-              color="var(--accent)"
-            />
-          ) : (
-            <BiHeart
-              onClick={() => toggleLike()}
-              cursor={"pointer"}
-              size={20}
-              color="var(--accent)"
-            />
-          )}
-          {essayDetails.likes}
-        </div>
+        <button className="like-btn" onClick={toggleLike}>
+          {isLiked ? <BiSolidHeart size={16} /> : <BiHeart size={16} />}
+          <span className="mono like-count">{essayDetails.likes}</span>
+        </button>
       </div>
     </div>
   );

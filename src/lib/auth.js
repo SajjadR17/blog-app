@@ -22,12 +22,25 @@ export async function signup(email, password, username) {
   );
   const user = userCredential.user;
 
+  function buildShortName(fullName) {
+    const words = fullName.trim().split(/\s+/);
+
+    if (words.length === 1) {
+      return words[0].slice(0, 2).toUpperCase();
+    }
+
+    const first = words[0][0];
+    const last = words[words.length - 1][0];
+    return (first + last).toUpperCase();
+  }
+
   await setDoc(doc(db, "users", user.uid), {
     email: user.email,
     role: "user",
-    id: crypto.randomUUID(),
+    uid: user.uid,
     username: username,
     liked: [],
+    shortName: buildShortName(username),
   });
 
   return user;

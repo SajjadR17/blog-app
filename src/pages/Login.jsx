@@ -3,7 +3,7 @@ import "../styles/login.css";
 import { login } from "../lib/auth";
 import { ClipLoader } from "react-spinners";
 import { useAuth } from "../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
   const [loading, setLoading] = useState(false);
@@ -17,7 +17,7 @@ function Login() {
     if (user) {
       navigate("/essays");
     }
-  });
+  }, [user, navigate]);
 
   const loginHandler = async (e) => {
     e.preventDefault();
@@ -26,13 +26,13 @@ function Login() {
     }
     setLoading(true);
     try {
-      const result = await login(emailInputValue, passInputValue);
+      const result = await login(emailInputValue.trim(), passInputValue.trim());
       const user = result.user;
       console.log(user);
     } catch (err) {
-      if (err.toString().includes("network-request-faild")) {
+      if (err.toString().includes("network-request-failed")) {
         setError("Your internet is weak, please try again later");
-      } else if (err.toString().includes("too-many-request")) {
+      } else if (err.toString().includes("too-many-requests")) {
         setError("Too many attempts, please try again later");
       } else if (err.toString().includes("user-disabled")) {
         setError("Your account has been banned");
@@ -44,6 +44,8 @@ function Login() {
         setError("Invalid email or password");
       } else if (err.toString().includes("invalid-email")) {
         setError("Invalid email format");
+      } else {
+        setError("Something went wrong, please try again.");
       }
     } finally {
       setLoading(false);
@@ -81,15 +83,21 @@ function Login() {
             className="email-input"
             value={emailInputValue}
             placeholder="Email"
-            onChange={(e) => setEmailInputValue(e.target.value.trim())}
+            onChange={(e) => setEmailInputValue(e.target.value)}
           />
           <input
-            type="text"
+            type="password"
             className="pass-input"
             value={passInputValue}
             placeholder="Password"
-            onChange={(e) => setPassInputValue(e.target.value.trim())}
+            onChange={(e) => setPassInputValue(e.target.value)}
           />
+          <div className="login-links">
+            <p className="mono signup-link">
+              <Link to={"/signup"}>Dont have an account ? SIGNUP</Link>
+            </p>
+            <p className="mono forgot-pass-link">Forgot password ? RESTORE</p>
+          </div>
           <button className="login-btn" type="submit">
             {loading ? <ClipLoader size={20} color="#fff" /> : "Login"}
           </button>

@@ -66,10 +66,10 @@
   margin-top: 7px;
 }
 
-.essay-bottom{
+.essay-bottom {
   display: flex;
   align-items: center;
-  gap: 50px;
+  justify-content: space-between;
 }
 
 .essay-tags {
@@ -78,11 +78,20 @@
   gap: 10px;
 }
 
-.essay-likes {
+.like-btn {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.like-count {
+  font-size: 12px;
 }
 
 .tag {
@@ -91,6 +100,7 @@
   justify-content: center;
   padding: 10px;
   border-radius: 5px;
+  border: 1px solid var(--border);
   background-color: var(--bg-card);
   font-size: 12px;
 }
