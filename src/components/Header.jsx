@@ -139,7 +139,7 @@ function Header() {
                 LOGIN
               </Link>
             )}
-            {user && userProfile.role === "admin" && (
+            {user && userProfile?.role === "admin" && (
               <Link
                 to={"/add-blog"}
                 onClick={() => setMenuOpen(false)}
