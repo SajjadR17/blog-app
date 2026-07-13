@@ -5,6 +5,15 @@ import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { logout } from "../lib/auth";
 import { useTheme } from "../contexts/ThemeContext";
+import {
+  LuBookOpen,
+  LuFileText,
+  LuLogIn,
+  LuLogOut,
+  LuSquarePen,
+  LuUser,
+  LuX,
+} from "react-icons/lu";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -16,9 +25,9 @@ function Header() {
     <>
       <header>
         <nav className={`nav body ${searchOpen ? "search-open" : null}`}>
-          <span className={`logo ${searchOpen ? "search-open" : null}`}>
+          <Link to={"/essays"} className={`logo ${searchOpen ? "search-open" : null}`}>
             ✦ <span>Ink & Field</span>
-          </span>
+          </Link>
           <div className="quick-links">
             <NavLink to={"/essays"} className="quick-link">
               ESSAYS
@@ -104,49 +113,54 @@ function Header() {
         <div className="menu-header">
           <span>Menu</span>
           <span className="close-menu-btn" onClick={() => setMenuOpen(false)}>
-            ✖
+            <LuX />
           </span>
         </div>
         <div className="menu">
           <div className="menu-links">
-            <Link
+            <NavLink
               to={"/essays"}
               onClick={() => setMenuOpen(false)}
               className="menu-link"
             >
+              <LuFileText size={20} />
               ESSAYS
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to={"/journal"}
               onClick={() => setMenuOpen(false)}
               className="menu-link"
             >
+              <LuBookOpen size={20} />
               JOURNAL
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to={"/about"}
               onClick={() => setMenuOpen(false)}
               className="menu-link"
             >
+              <LuUser size={20} />
               ABOUT
-            </Link>
+            </NavLink>
             {!user && (
-              <Link
+              <NavLink
                 to={"/login"}
                 onClick={() => setMenuOpen(false)}
                 className="menu-link"
               >
+                <LuLogIn size={20} />
                 LOGIN
-              </Link>
+              </NavLink>
             )}
             {user && userProfile?.role === "admin" && (
-              <Link
+              <NavLink
                 to={"/add-blog"}
                 onClick={() => setMenuOpen(false)}
                 className="menu-link"
               >
+                <LuSquarePen size={20} />
                 NEW POST
-              </Link>
+              </NavLink>
             )}
             {user && (
               <Link
@@ -157,6 +171,7 @@ function Header() {
                 }}
                 className="menu-link"
               >
+                <LuLogOut size={20} />
                 LOGOUT
               </Link>
             )}
