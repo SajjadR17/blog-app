@@ -40,14 +40,14 @@
   border-color: var(--accent);
 }
 
-.search-icon,
+.user-icon,
 .menu-icon,
 .theme-icon {
   transition: all 0.2s ease;
   color: var(--text-secondary);
 }
 
-.search-icon:hover,
+.user-icon:hover,
 .menu-icon:hover,
 .theme-icon:hover {
   color: var(--text-primary);
@@ -106,15 +106,8 @@
   font-weight: 600;
 }
 
-.close-menu-btn,
-.close-search-btn {
+.close-menu-btn {
   cursor: pointer;
-  background-color: transparent;
-  border: none;
-}
-
-.close-search-btn {
-  color: var(--text-secondary);
 }
 
 .menu {
@@ -192,29 +185,41 @@
   color: var(--text-secondary);
 }
 
-.search-input-container {
-  display: flex;
-  align-items: center;
-  gap: 5px;
+.header-user-profile {
+  position: relative;
+}
+
+.header-user-profile-card {
+  position: absolute;
+  right: 0;
+  padding: 10px;
+  display: none;
+  top: 30px;
+  width: 250px;
+  background-color: var(--bg-primary);
   border: 1px solid var(--border);
   border-radius: 5px;
-  padding: 0 10px;
-  color: var(--text-secondary);
 }
 
-.search-input-container input {
-  background-color: transparent;
-  border: none;
+.header-user-profile-username,
+.header-user-profile-role {
+  display: flex;
+  align-items: center;
   font-size: 14px;
-  color: var(--text-primary);
+  gap: 10px;
 }
 
-.search-input-container input:focus {
-  outline: none;
+.header-user-profile:hover .header-user-profile-card {
+  display: block;
 }
 
-.search-input-container input::placeholder {
-  color: var(--text-secondary);
+.header-user-profile-username {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+}
+
+.header-user-profile-role {
+  padding-top: 10px;
 }
 
 @media (max-width: 767px) {
@@ -222,20 +227,8 @@
     display: none;
   }
 
-  .logo.search-open {
+  .header-user-profile {
     display: none;
-  }
-
-  .nav.search-open {
-    display: block;
-  }
-
-  .search-input-container {
-    width: 100%;
-  }
-
-  .search-input-container input {
-    width: 100%;
   }
 
   .menu-icon {

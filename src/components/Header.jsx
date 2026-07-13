@@ -1,4 +1,4 @@
-import { BiMenu, BiMoon, BiSearch, BiSun } from "react-icons/bi";
+import { BiMenu, BiMoon, BiSearch, BiSun, BiUser } from "react-icons/bi";
 import { Link, NavLink } from "react-router-dom";
 import "../styles/header.css";
 import { useState } from "react";
@@ -6,7 +6,9 @@ import { useAuth } from "../contexts/AuthContext";
 import { logout } from "../lib/auth";
 import { useTheme } from "../contexts/ThemeContext";
 import {
+  LuBadgeCheck,
   LuBookOpen,
+  LuCircleUser,
   LuFileText,
   LuLogIn,
   LuLogOut,
@@ -17,15 +19,14 @@ import {
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const { user, userProfile } = useAuth();
   const { theme, toggleTheme } = useTheme();
 
   return (
     <>
       <header>
-        <nav className={`nav body ${searchOpen ? "search-open" : null}`}>
-          <Link to={"/essays"} className={`logo ${searchOpen ? "search-open" : null}`}>
+        <nav className="nav body">
+          <Link to={"/essays"} className="logo">
             ✦ <span>Ink & Field</span>
           </Link>
           <div className="quick-links">
@@ -55,53 +56,42 @@ function Header() {
             )}
           </div>
           <div className="nav-right">
-            {searchOpen ? (
-              <div className="search-input-container">
-                <BiSearch size={20} />
-                <input
-                  type="text"
-                  className="search-input"
-                  placeholder="Search a blog title"
-                />
-                <button
-                  onClick={() => setSearchOpen(false)}
-                  className="close-search-btn"
-                  aria-label="Close search"
-                >
-                  ✖
-                </button>
-              </div>
-            ) : (
-              <>
-                {theme === "light" ? (
-                  <BiMoon
-                    size={20}
-                    cursor={"pointer"}
-                    onClick={toggleTheme}
-                    className="theme-icon"
-                  />
-                ) : (
-                  <BiSun
-                    size={20}
-                    cursor={"pointer"}
-                    onClick={toggleTheme}
-                    className="theme-icon"
-                  />
-                )}
-                <BiSearch
-                  className="search-icon"
+            <>
+              {theme === "light" ? (
+                <BiMoon
                   size={20}
                   cursor={"pointer"}
-                  onClick={() => setSearchOpen(true)}
+                  onClick={toggleTheme}
+                  className="theme-icon"
                 />
-                <BiMenu
-                  onClick={() => setMenuOpen(true)}
-                  className="menu-icon"
-                  size={25}
+              ) : (
+                <BiSun
+                  size={20}
                   cursor={"pointer"}
+                  onClick={toggleTheme}
+                  className="theme-icon"
                 />
-              </>
-            )}
+              )}
+              <div className="header-user-profile">
+                <BiUser className="user-icon"  size={20} cursor={"pointer"} />
+                <div className="header-user-profile-card">
+                  <div className="header-user-profile-username">
+                    <LuCircleUser size={18} />
+                    {userProfile.username}
+                  </div>
+                  <div className="header-user-profile-role">
+                    <LuBadgeCheck size={18} />
+                    {userProfile.role}
+                  </div>
+                </div>
+              </div>
+              <BiMenu
+                onClick={() => setMenuOpen(true)}
+                className="menu-icon"
+                size={25}
+                cursor={"pointer"}
+              />
+            </>
           </div>
         </nav>
       </header>
