@@ -23,7 +23,7 @@ function About() {
           <BiGlobe size={18} />
         </a>
         <a
-          href="https://github.com/sajjadroohandeh"
+          href="https://github.com/SajjadR17"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"

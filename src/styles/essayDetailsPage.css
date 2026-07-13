@@ -56,15 +56,6 @@
   hyphens: auto;
 }
 
-.essay-body::first-letter {
-  font-size: 3rem;
-  line-height: 0.8;
-  font-weight: bold;
-  float: left;
-  margin-right: 10px;
-  color: var(--accent);
-  margin-top: 10px;
-}
 
 .essay-bottom {
   display: flex;

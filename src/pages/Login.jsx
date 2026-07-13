@@ -5,6 +5,8 @@ import { ClipLoader } from "react-spinners";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 function Login() {
   const [loading, setLoading] = useState(false);
   const [passInputValue, setPassInputValue] = useState("");
@@ -13,20 +15,72 @@ function Login() {
   const { user } = useAuth();
   const navigate = useNavigate();
 
+  const [emailErr, setEmailErr] = useState("");
+  const [passErr, setPassErr] = useState("");
+
+  const [emailTouched, setEmailTouched] = useState(false);
+  const [passTouched, setPassTouched] = useState(false);
+
   useEffect(() => {
     if (user) {
       navigate("/essays");
     }
   }, [user, navigate]);
 
+  function validateEmail(value) {
+    if (value.trim().length === 0) return "Email is required.";
+    if (!EMAIL_REGEX.test(value.trim())) return "Enter a valid email address.";
+    return "";
+  }
+
+  function validatePassword(value) {
+    if (value.length === 0) return "Password is required.";
+    return "";
+  }
+
+  function handleEmailChange(e) {
+    const value = e.target.value;
+    setEmailInputValue(value);
+    if (emailTouched) setEmailErr(validateEmail(value));
+  }
+
+  function handlePasswordChange(e) {
+    const value = e.target.value;
+    setPassInputValue(value);
+    if (passTouched) setPassErr(validatePassword(value));
+  }
+
+  function handleEmailBlur() {
+    setEmailTouched(true);
+    setEmailErr(validateEmail(emailInputValue));
+  }
+
+  function handlePasswordBlur() {
+    setPassTouched(true);
+    setPassErr(validatePassword(passInputValue));
+  }
+
   const loginHandler = async (e) => {
     e.preventDefault();
-    if (passInputValue.length === 0 || emailInputValue.length === 0) {
+
+    const eErr = validateEmail(emailInputValue);
+    const pErr = validatePassword(passInputValue);
+
+    setEmailTouched(true);
+    setPassTouched(true);
+    setEmailErr(eErr);
+    setPassErr(pErr);
+
+    if (eErr || pErr) {
       return;
     }
+
     setLoading(true);
     try {
-      const result = await login(emailInputValue.trim(), passInputValue.trim());
+      const result = await login(
+        emailInputValue.trim(),
+        passInputValue.trim(),
+      );
       const user = result.user;
       console.log(user);
     } catch (err) {
@@ -76,27 +130,39 @@ function Login() {
       )}
       <div className={`overlay ${error.length > 0 ? "active" : null}`}></div>
       <div className="login">
-        <form onSubmit={loginHandler} className="login-form">
+        <form onSubmit={loginHandler} className="login-form" noValidate>
           <h1 className="login-title display">Login</h1>
-          <input
-            type="text"
-            className="email-input"
-            value={emailInputValue}
-            placeholder="Email"
-            onChange={(e) => setEmailInputValue(e.target.value)}
-          />
-          <input
-            type="password"
-            className="pass-input"
-            value={passInputValue}
-            placeholder="Password"
-            onChange={(e) => setPassInputValue(e.target.value)}
-          />
+
+          <div className="input-container">
+            <input
+              type="text"
+              className="email-input"
+              value={emailInputValue}
+              placeholder="Email"
+              onChange={handleEmailChange}
+              onBlur={handleEmailBlur}
+            />
+            <span className="input-err mono">{emailTouched && emailErr}</span>
+          </div>
+
+          <div className="input-container">
+            <input
+              type="password"
+              className="pass-input"
+              value={passInputValue}
+              placeholder="Password"
+              onChange={handlePasswordChange}
+              onBlur={handlePasswordBlur}
+            />
+            <span className="input-err mono">{passTouched && passErr}</span>
+          </div>
+
           <div className="login-links">
             <p className="mono signup-link">
               <Link to={"/signup"}>Dont have an account ? SIGNUP</Link>
             </p>
           </div>
+
           <button className="login-btn" type="submit">
             {loading ? <ClipLoader size={20} color="#fff" /> : "Login"}
           </button>
