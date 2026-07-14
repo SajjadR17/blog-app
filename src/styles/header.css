@@ -178,10 +178,12 @@
   overflow: hidden;
   font-size: 14px;
   overflow-x: auto;
+  text-transform: capitalize;
 }
 
 .userRole {
   font-size: 12px;
+  text-transform: capitalize;
   color: var(--text-secondary);
 }
 

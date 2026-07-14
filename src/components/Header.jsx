@@ -176,10 +176,16 @@ function Header() {
           </div>
           {user && (
             <div className="menu-profile-card">
-              <div className="profile-img">{userProfile?.shortName}</div>
+              <div className="profile-img">
+                {userProfile.shortName ? userProfile.shortName : "UR"}
+              </div>
               <div className="profile-info">
-                <span className="username">{userProfile?.username}</span>
-                <span className="userRole">{userProfile?.role}</span>
+                <span className="username">
+                  {userProfile.username ? userProfile.username : "User"}
+                </span>
+                <span className="userRole">
+                  {userProfile.role ? userProfile.role : "---"}
+                </span>
               </div>
             </div>
           )}
