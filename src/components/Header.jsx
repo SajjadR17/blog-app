@@ -177,14 +177,14 @@ function Header() {
           {user && (
             <div className="menu-profile-card">
               <div className="profile-img">
-                {userProfile.shortName ? userProfile.shortName : "UR"}
+                {userProfile?.shortName ? userProfile?.shortName : "UR"}
               </div>
               <div className="profile-info">
                 <span className="username">
-                  {userProfile.username ? userProfile.username : "User"}
+                  {userProfile?.username ? userProfile?.username : "User"}
                 </span>
                 <span className="userRole">
-                  {userProfile.role ? userProfile.role : "---"}
+                  {userProfile?.role ? userProfile?.role : "---"}
                 </span>
               </div>
             </div>
