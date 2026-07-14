@@ -41,7 +41,6 @@
 .journal-content {
   font-size: var(--fs-excerpt);
   color: var(--text-primary);
-  font-weight: 600;
   text-align: justify;
   text-align-last: left;
   hyphens: auto;

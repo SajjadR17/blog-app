@@ -1,5 +1,5 @@
 import { BiMenu, BiMoon, BiSearch, BiSun, BiUser } from "react-icons/bi";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "../styles/header.css";
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
@@ -21,6 +21,7 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { user, userProfile } = useAuth();
   const { theme, toggleTheme } = useTheme();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -73,17 +74,24 @@ function Header() {
                 />
               )}
               <div className="header-user-profile">
-                <BiUser className="user-icon"  size={20} cursor={"pointer"} />
-                <div className="header-user-profile-card">
-                  <div className="header-user-profile-username">
-                    <LuCircleUser size={18} />
-                    {userProfile.username}
+                <BiUser
+                  className="user-icon"
+                  onClick={user ? null : () => navigate("/login")}
+                  size={20}
+                  cursor={"pointer"}
+                />
+                {user && (
+                  <div className="header-user-profile-card">
+                    <div className="header-user-profile-username">
+                      <LuCircleUser size={18} />
+                      {userProfile?.username}
+                    </div>
+                    <div className="header-user-profile-role">
+                      <LuBadgeCheck size={18} />
+                      {userProfile?.role}
+                    </div>
                   </div>
-                  <div className="header-user-profile-role">
-                    <LuBadgeCheck size={18} />
-                    {userProfile.role}
-                  </div>
-                </div>
+                )}
               </div>
               <BiMenu
                 onClick={() => setMenuOpen(true)}
