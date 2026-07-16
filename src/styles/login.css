@@ -5,7 +5,7 @@
   height: 70vh;
 }
 
-.login-form h1{
+.login-form h1 {
   margin-bottom: 20px;
 }
 
@@ -13,7 +13,6 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 30px;
   width: 50%;
 }
 
@@ -31,7 +30,8 @@
   outline: none;
 }
 
-.login-form button {
+.login-btn,
+.google-login-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,12 +39,23 @@
   border: none;
   transition: all 0.2s ease;
   border-radius: 5px;
-  background-color: var(--accent);
   color: #fff;
 }
 
-.login-form button:hover {
+.login-btn {
+  background-color: var(--accent);
+}
+
+.google-login-btn {
+  background-color: var(--accent2);
+}
+
+.login-btn:hover {
   background-color: var(--accent-hover);
+}
+
+.google-login-btn:hover {
+  background-color: var(--accent2-hover);
 }
 
 .error-modal {
@@ -80,18 +91,30 @@
   background-color: var(--accent-hover);
 }
 
-.login-links{
+.login-links {
   margin: 5px 0;
 }
 
-.login-links p{
+.login-links p {
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.login-links p:hover{
+.login-links p:hover {
   color: var(--accent);
   transform: translateX(5px);
+}
+
+.or-line-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-secondary);
+}
+
+.or-line {
+  width: 100%;
+  border-bottom: 1px solid var(--text-secondary);
 }
 
 @media (max-width: 1000px) {

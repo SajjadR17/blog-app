@@ -9,7 +9,6 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 30px;
   width: 50%;
 }
 
@@ -27,7 +26,7 @@
   outline: none;
 }
 
-.signup-form button {
+.signup-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,37 +38,103 @@
   color: #fff;
 }
 
-.signup-form button:hover {
+.signup-btn:hover {
   background-color: var(--accent-hover);
 }
 
-.signup-form h1{
+.signup-form h1 {
   margin-bottom: 20px;
 }
 
-.signup-links{
+.signup-links {
   gap: 5px;
   margin-bottom: 7px;
 }
 
-.signup-links p{
+.signup-links p {
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.signup-links p:hover{
+.signup-links p:hover {
   color: var(--accent);
   transform: translateX(5px);
 }
 
-.input-container{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.input-container span{
-    color: var(--accent2);
+.input-container span {
+  color: var(--accent2);
+}
+
+.sign-in-message {
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 14px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.sign-in-title {
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.sign-in-lead {
+  color: var(--text-primary);
+  font-size: 15px;
+}
+
+.sign-in-note {
+  margin-top: 20px;
+  padding: 18px 20px;
+  border-radius: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.sign-in-note-title {
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.sign-in-note-text {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.continue-btn,
+.send-email-verification-btn,
+.check-verification-btn {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent);
+  border: none;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+  color: #fff;
+  width: 100%;
+}
+
+.continue-btn:hover,
+.send-email-verification-btn:hover,
+.check-verification-btn:hover {
+  background-color: var(--accent-hover);
 }
 
 @media (max-width: 1000px) {

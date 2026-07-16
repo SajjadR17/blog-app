@@ -36,6 +36,7 @@ main {
   --accent-rgb: 75, 93, 69;
   --accent-hover: #597350;
   --accent2: #9c6b45;
+  --accent2-hover: #b18d6f;
   --line: #dedacb;
 
   --font-display: "Fraunces", serif;
@@ -64,6 +65,7 @@ main {
   --accent-rgb: 143, 179, 128;
   --accent-hover: #a3c494;
   --accent2: #c68b5c;
+  --accent2-hover: #b18d6f;
   --line: #3a362f;
 }
 
@@ -138,6 +140,10 @@ select {
 
 button {
   cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
 }
 
 ul,
