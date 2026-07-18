@@ -73,26 +73,14 @@ function Header() {
                   className="theme-icon"
                 />
               )}
-              <div className="header-user-profile">
-                <BiUser
-                  className="user-icon"
-                  onClick={user ? null : () => navigate("/login")}
-                  size={20}
-                  cursor={"pointer"}
-                />
-                {user && (
-                  <div className="header-user-profile-card">
-                    <div className="header-user-profile-username">
-                      <LuCircleUser size={18} />
-                      {userProfile?.username}
-                    </div>
-                    <div className="header-user-profile-role">
-                      <LuBadgeCheck size={18} />
-                      {userProfile?.role}
-                    </div>
-                  </div>
-                )}
-              </div>
+              <BiUser
+                className="user-icon"
+                onClick={
+                  user ? () => navigate("/profile") : () => navigate("/login")
+                }
+                size={20}
+                cursor={"pointer"}
+              />
               <BiMenu
                 onClick={() => setMenuOpen(true)}
                 className="menu-icon"

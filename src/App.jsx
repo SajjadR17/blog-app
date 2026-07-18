@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import EssayDetailsPage from "./pages/EssayDetailsPage";
 import AddBlog from "./pages/AddBlog";
 import Signup from "./pages/Signup";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route element={<Login />} path="/login" />
           <Route element={<Signup />} path="/signup" />
           <Route element={<AddBlog />} path="/add-blog" />
+          <Route element={<Profile />} path="/profile" />
         </Routes>
       </main>
     </>
