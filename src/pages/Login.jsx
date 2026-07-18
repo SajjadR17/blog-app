@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../styles/login.css";
+import "../styles/auth.css";
 import { googleLogin, login } from "../lib/auth";
 import { ClipLoader } from "react-spinners";
 import { useAuth } from "../contexts/AuthContext";
@@ -241,9 +241,9 @@ function Login() {
           )}
         </div>
       ) : (
-        <div className="login">
-          <form onSubmit={loginHandler} className="login-form" noValidate>
-            <h1 className="login-title display">Login</h1>
+        <div className="auth">
+          <form onSubmit={loginHandler} className="auth-form" noValidate>
+            <h1 className="auth-title display">Login</h1>
 
             <div className="input-container">
               <input
@@ -267,14 +267,14 @@ function Login() {
               <span className="input-err mono">{passErr}</span>
             </div>
 
-            <div className="login-links">
+            <div className="auth-links">
               <p className="mono signup-link">
                 <Link to={"/signup"}>Dont have an account ? SIGNUP</Link>
               </p>
             </div>
 
             <button
-              className="login-btn"
+              className="auth-btn"
               disabled={googleLoginLoading}
               type="submit"
             >

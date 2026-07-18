@@ -1,0 +1,214 @@
+.auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 50%;
+}
+
+.auth-title {
+  margin-bottom: 20px;
+}
+
+.auth-form input {
+  padding: 10px;
+  border: 1px solid var(--text-secondary);
+  background-color: var(--bg-primary);
+  border-radius: 5px;
+  caret-color: var(--accent);
+  transition: all 0.2s ease;
+  color: var(--text-primary);
+}
+
+.auth-form input:focus {
+  outline: none;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.input-err {
+  color: var(--accent2);
+  font-size: 12px;
+}
+
+.auth-links {
+  margin-bottom: 5px;
+}
+
+.auth-links p {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.auth-links p:hover {
+  color: var(--accent);
+  transform: translateX(3px);
+}
+
+.auth-links a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.auth-btn,
+.google-login-btn,
+.continue-btn,
+.send-email-verification-btn,
+.check-verification-btn,
+.error-modal-ok-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  transition: all 0.2s ease;
+}
+
+.auth-btn,
+.continue-btn,
+.send-email-verification-btn,
+.check-verification-btn,
+.error-modal-ok-btn {
+  background-color: var(--accent);
+}
+
+.auth-btn:hover,
+.continue-btn:hover,
+.send-email-verification-btn:hover,
+.check-verification-btn:hover,
+.error-modal-ok-btn:hover {
+  background-color: var(--accent-hover);
+}
+
+.google-login-btn {
+  background-color: var(--accent2);
+}
+
+.google-login-btn:hover {
+  background-color: var(--accent2-hover);
+}
+
+.or-line-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-secondary);
+}
+
+.or-line {
+  width: 100%;
+  border-bottom: 1px solid var(--text-secondary);
+}
+
+.error-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 340px;
+  padding: 20px;
+  border: 1px solid var(--accent);
+  border-radius: 5px;
+  background-color: var(--bg-card);
+  font-size: 16px;
+  position: fixed;
+  z-index: 999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.error-text {
+  color: var(--text-primary);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.2s;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sign-in-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  gap: 14px;
+  text-align: center;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.sign-in-title {
+  color: var(--accent);
+}
+
+.sign-in-lead {
+  color: var(--text-primary);
+  font-size: 15px;
+}
+
+.sign-in-note {
+  margin-top: 20px;
+  padding: 18px 20px;
+  border-radius: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.sign-in-note-title {
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.sign-in-note-text {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.continue-btn,
+.send-email-verification-btn,
+.check-verification-btn {
+  width: 100%;
+}
+
+@media (max-width: 1000px) {
+  .auth-form {
+    width: 70%;
+  }
+}
+
+@media (max-width: 767px) {
+  .auth-form {
+    width: 100%;
+  }
+
+  .error-modal {
+    width: 90%;
+  }
+}

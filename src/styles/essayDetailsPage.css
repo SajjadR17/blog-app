@@ -16,19 +16,44 @@
   margin-top: 30px;
 }
 
-.writer-profile-card {
+.author-profile-card-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.follow-author-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  color: var(--text-primary);
+  font-size: 12px;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.follow-author-btn:hover{
+  background-color: var(--bg-card);
+  color: var(--accent2);
+  border-color: var(--accent2);
+}
+
+.author-profile-card {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.writer-profile-info {
+.author-profile-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.writer-profile-img {
+.author-profile-img {
   width: 40px;
   height: 40px;
   display: flex;
@@ -45,7 +70,14 @@
   gap: 20px;
 }
 
-.writer-name {
+.essay-micro-details span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+}
+
+.author-name {
   font-size: 14px;
   font-weight: 600;
 }
@@ -54,8 +86,8 @@
   text-align: justify;
   text-align-last: left;
   hyphens: auto;
+  color: var(--text-primary);
 }
-
 
 .essay-bottom {
   display: flex;
@@ -69,22 +101,6 @@
   gap: 10px;
 }
 
-.like-btn {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 10px 16px;
-  border-radius: 5px;
-  border: 1px solid var(--border);
-  background: var(--bg-card);
-  color: var(--text-secondary);
-  transition: all 0.2s ease;
-}
-
-.like-count {
-  font-size: 12px;
-}
-
 .tag {
   display: flex;
   align-items: center;
@@ -94,4 +110,34 @@
   border: 1px solid var(--border);
   background-color: var(--bg-card);
   font-size: 12px;
+}
+
+.essay-intractions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  margin-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.like-btn,
+.bookmark-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.like-count {
+  font-size: 12px;
+}
+
+.essay-btns {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }

@@ -34,9 +34,9 @@ main {
   --text-secondary: #57534a;
   --accent: #4b5d45;
   --accent-rgb: 75, 93, 69;
-  --accent-hover: #597350;
+  --accent-hover: #566b4f;
   --accent2: #9c6b45;
-  --accent2-hover: #b18d6f;
+  --accent2-hover: #a27756;
   --line: #dedacb;
 
   --font-display: "Fraunces", serif;
@@ -63,9 +63,9 @@ main {
   --text-secondary: #a8a296;
   --accent: #779469;
   --accent-rgb: 143, 179, 128;
-  --accent-hover: #a3c494;
+  --accent-hover: #87a478;
   --accent2: #c68b5c;
-  --accent2-hover: #b18d6f;
+  --accent2-hover: rgb(189, 153, 123);
   --line: #3a362f;
 }
 
