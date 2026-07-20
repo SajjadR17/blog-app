@@ -165,7 +165,10 @@ function Header() {
           {user && (
             <div
               className="menu-profile-card"
-              onClick={() => navigate("/profile")}
+              onClick={() => {
+                navigate("/profile");
+                setMenuOpen(false);
+              }}
             >
               <div className="profile-img">
                 {userProfile?.shortName ? userProfile?.shortName : "UR"}

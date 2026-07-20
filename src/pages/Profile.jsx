@@ -3,6 +3,7 @@ import ProfileHeader from "../components/ProfileHeader";
 import ProfileStats from "../components/ProfileStats";
 import "../styles/profile.css";
 import LikedTab from "../components/LikedTab";
+import BookmarkedTab from "../components/BookmarkedTab";
 
 function Profile() {
   const [openTab, setOpenTab] = useState("liked");
@@ -24,7 +25,7 @@ function Profile() {
           BOOKMARKED
         </div>
       </div>
-      {openTab === "liked" ? <LikedTab /> : null}
+      {openTab === "liked" ? <LikedTab /> : <BookmarkedTab />}
     </>
   );
 }

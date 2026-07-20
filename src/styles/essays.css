@@ -46,6 +46,9 @@
 .essay-excerpt {
   font-size: var(--fs-excerpt);
   color: var(--text-secondary);
+  text-align: justify;
+  text-align-last: left;
+  hyphens: auto;
 }
 
 .essay-details {

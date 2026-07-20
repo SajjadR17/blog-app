@@ -16,13 +16,13 @@
   margin-top: 30px;
 }
 
-.author-profile-card-container{
+.author-profile-card-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.follow-author-btn{
+.follow-author-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,7 +35,7 @@
   transition: all 0.2s ease;
 }
 
-.follow-author-btn:hover{
+.follow-author-btn:hover {
   background-color: var(--bg-card);
   color: var(--accent2);
   border-color: var(--accent2);
