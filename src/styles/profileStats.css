@@ -20,6 +20,13 @@
   font-weight: 600;
 }
 
+@media (max-width: 767px) {
+  .profile-stats {
+    padding: 0;
+    padding-bottom: 30px;
+  }
+}
+
 @media (max-width: 480px) {
   .profile-stats {
     display: grid;

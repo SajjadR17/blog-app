@@ -50,11 +50,6 @@ function Header() {
                 NEW POST
               </NavLink>
             )}
-            {user && (
-              <button onClick={() => logout()} className="quick-link">
-                LOGOUT
-              </button>
-            )}
           </div>
           <div className="nav-right">
             <>

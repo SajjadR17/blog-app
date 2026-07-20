@@ -70,7 +70,14 @@
   gap: 5px;
 }
 
-.edit-profile-btn {
+.profile-action-btns{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.edit-profile-btn,
+.logout-profile-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,7 +89,8 @@
   font-size: 14px;
 }
 
-.edit-profile-btn:hover {
+.edit-profile-btn:hover,
+.logout-profile-btn:hover {
   background-color: var(--bg-card);
   color: var(--accent2);
   border-color: var(--accent2);
@@ -117,9 +125,19 @@
     font-size: 14px;
   }
 
+  .profile-action-btns{
+    flex-direction: column;
+    
+  }
+
   .profile-role,
   .devider,
   .profile-user-account-createdAt {
     display: none;
+  }
+
+  .edit-profile-btn,
+  .logout-profile-btn{
+    width: 100%;
   }
 }
