@@ -163,7 +163,10 @@ function Header() {
             )}
           </div>
           {user && (
-            <div className="menu-profile-card">
+            <div
+              className="menu-profile-card"
+              onClick={() => navigate("/profile")}
+            >
               <div className="profile-img">
                 {userProfile?.shortName ? userProfile?.shortName : "UR"}
               </div>
