@@ -64,6 +64,10 @@
   border-radius: 50%;
 }
 
+.essay-author-img {
+  border-radius: 50%;
+}
+
 .essay-micro-details {
   display: flex;
   align-items: center;

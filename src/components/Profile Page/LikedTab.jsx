@@ -1,34 +1,35 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../contexts/AuthContext";
-import { getBookmarkedPosts } from "../utils/helpers";
+import { useAuth } from "../../contexts/AuthContext";
+import { getLikedPosts } from "../../utils/helpers";
+import "../../styles/likedTab.css";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { BiSad } from "react-icons/bi";
 import { arrayRemove, doc, increment, writeBatch } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db } from "../../../firebase";
 
-function BookmarkedTab() {
+function LikedTab() {
   const { user, userProfile } = useAuth();
-  const [bookmarkedPosts, setBookmarkedPosts] = useState(null);
+  const [likedPosts, setLikedPosts] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchBookmarked = async () => {
-      if (!userProfile?.bookmarks || userProfile.bookmarks.length === 0) {
-        setBookmarkedPosts([]);
+    const fetchLiked = async () => {
+      if (!userProfile?.likes || userProfile.likes.length === 0) {
+        setLikedPosts([]);
         setLoading(false);
         return;
       }
       setLoading(true);
-      const posts = await getBookmarkedPosts(userProfile.bookmarks);
-      setBookmarkedPosts(posts);
+      const posts = await getLikedPosts(userProfile.likes);
+      setLikedPosts(posts);
       setLoading(false);
     };
-    fetchBookmarked();
+    fetchLiked();
   }, [userProfile]);
 
-  const deleteBookmarkedPostHandler = async (e,slug) => {
+  const deleteLikedPostHandler = async (e, slug) => {
     e.stopPropagation();
     try {
       const userRef = doc(db, "users", user.uid);
@@ -36,8 +37,8 @@ function BookmarkedTab() {
 
       const batch = writeBatch(db);
 
-      batch.update(userRef, { bookmarks: arrayRemove(slug) });
-      batch.update(postRef, { bookmarks: increment(-1) });
+      batch.update(userRef, { likes: arrayRemove(slug) });
+      batch.update(postRef, { likes: increment(-1) });
 
       await batch.commit();
     } catch (err) {
@@ -47,25 +48,27 @@ function BookmarkedTab() {
 
   if (loading)
     return (
-      <div className="profile-bookmarks-loading mono">
-        <ClipLoader color="var(--accent)" size={25} /> LOADING BOOKMARKED
+      <div className="profile-likes-loading mono">
+        <ClipLoader color="var(--accent)" size={25} /> LOADING LIKES
       </div>
     );
-  if (bookmarkedPosts.length === 0)
+  if (likedPosts.length === 0)
     return (
-      <p className="profile-empty-bookmarks mono">
+      <p className="profile-empty-likes mono">
         <BiSad size={40} />
-        NO BOOKMARKED POSTS YET
+        NO LIKED POSTS YET
       </p>
     );
 
   return (
     <div className="profile-post-list">
-      {bookmarkedPosts.map((post) => (
-        <div className="profile-post-row" onClick={() => navigate(`/essay/${post.slug}`)} key={post.id}>
-          <div
-            className="profile-post-main"
-          >
+      {likedPosts.map((post) => (
+        <div
+          className="profile-post-row"
+          onClick={() => navigate(`/essay/${post.slug}`)}
+          key={post.id}
+        >
+          <div className="profile-post-main">
             <span className="profile-post-eyebrow mono">{post.category}</span>
             <div className="profile-post-title display">{post.title}</div>
             <span className="profile-post-meta mono">
@@ -74,8 +77,8 @@ function BookmarkedTab() {
           </div>
           <div className="post-action-btns">
             <button
-              className="delete-profile-bookmarked-post"
-              onClick={(e) => deleteBookmarkedPostHandler(e,post.slug)}
+              className="delete-profile-liked-post"
+              onClick={(e) => deleteLikedPostHandler(e, post.slug)}
             >
               ✕
             </button>
@@ -86,4 +89,4 @@ function BookmarkedTab() {
   );
 }
 
-export default BookmarkedTab;
+export default LikedTab;

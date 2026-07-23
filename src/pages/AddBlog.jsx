@@ -3,7 +3,7 @@ import "../styles/addBlog.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { db } from "../../firebase";
+import { auth, db } from "../../firebase";
 import { ClipLoader } from "react-spinners";
 
 function loadDraft() {
@@ -135,11 +135,11 @@ function AddBlog() {
         slug: slugValue,
         excerpt: excerptValue,
         body: textValue,
-        author: "Sajjad Roohandeh",
-        authorInitials: "SR",
+        authorUid: auth.currentUser.uid,
         category: categoryValue,
         tags: parsedTags,
         likes: 0,
+        bookmarks: 0,
         readMins: Number(readMinsValue),
         date: date,
         id: crypto.randomUUID(),

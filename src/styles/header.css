@@ -155,7 +155,7 @@
   padding: 20px 0;
 }
 
-.profile-img {
+.menu-profile-avatar {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -166,6 +166,10 @@
   background-color: var(--text-secondary);
   color: #fff;
   font-weight: 600;
+}
+
+.menu-profile-img {
+  border-radius: 50%;
 }
 
 .profile-info {

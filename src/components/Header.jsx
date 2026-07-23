@@ -165,15 +165,19 @@ function Header() {
                 setMenuOpen(false);
               }}
             >
-              <div className="profile-img">
-                {userProfile?.shortName ? userProfile?.shortName : "UR"}
+              <div className="menu-profile-avatar">
+                {userProfile?.photoURL
+                  ? <img src={`${userProfile?.photoURL}`} className="menu-profile-img" />
+                  : userProfile?.shortName
+                    ? userProfile?.shortName
+                    : "UR"}
               </div>
               <div className="profile-info">
                 <span className="username">
                   {userProfile?.username ? userProfile?.username : "User"}
                 </span>
                 <span className="userRole">
-                  {userProfile?.role ? userProfile?.role : "---"}
+                  {userProfile?.role ? userProfile?.role : "user"}
                 </span>
               </div>
             </div>

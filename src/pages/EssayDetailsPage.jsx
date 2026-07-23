@@ -5,6 +5,7 @@ import {
   arrayRemove,
   arrayUnion,
   doc,
+  getDoc,
   increment,
   onSnapshot,
   writeBatch,
@@ -26,6 +27,7 @@ import { LuBadgeCheck } from "react-icons/lu";
 function EssayDetailsPage() {
   const { slug } = useParams();
   const [essayDetails, setEssayDetails] = useState(null);
+  const [authorDetails, setAuthorDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
@@ -52,6 +54,23 @@ function EssayDetailsPage() {
 
     return unsubscribe;
   }, [slug]);
+
+  useEffect(() => {
+    const getAuthorDetails = async () => {
+      try {
+        if (!essayDetails) {
+          return;
+        }
+        const ref = doc(db, "users", essayDetails?.authorUid);
+        const snap = await getDoc(ref);
+        setAuthorDetails(snap.data());
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    getAuthorDetails();
+  }, [essayDetails?.authorUid, essayDetails]);
 
   const toggleLike = async () => {
     const user = auth.currentUser;
@@ -162,18 +181,26 @@ function EssayDetailsPage() {
 
   return (
     <div className="essay">
-      <div onClick={() => navigate("/essays")} className="back-btn mono">
-        <BsArrowLeft /> BACK TO ESSAYS
+      <div onClick={() => history.back()} className="back-btn mono">
+        <BsArrowLeft /> BACK
       </div>
       <span className="essay-category mono">{essayDetails?.category}</span>
       <h1 className="essay-title display">{essayDetails?.title}</h1>
       <div className="author-profile-card-container">
         <div className="author-profile-card body">
           <div className="author-profile-img mono">
-            {essayDetails?.authorInitials}
+            {authorDetails?.photoURL ? (
+              <img
+                src={`${authorDetails?.photoURL}`}
+                className="essay-author-img"
+                alt=""
+              />
+            ) : (
+              authorDetails?.shortName
+            )}
           </div>
           <div className="author-profile-info">
-            <span className="author-name">{essayDetails?.author}</span>
+            <span className="author-name">{authorDetails?.username}</span>
             <div className="essay-micro-details mono">
               <span className="essay-created-at">{essayDetails?.date}</span>
             </div>
@@ -190,7 +217,7 @@ function EssayDetailsPage() {
       <p className="essay-body body">{essayDetails?.body}</p>
       <div className="essay-bottom">
         <div className="essay-tags mono">
-          {essayDetails.tags.map((tag, i) => (
+          {essayDetails?.tags?.map((tag, i) => (
             <div className="tag" key={i}>
               {tag.toUpperCase()}
             </div>
