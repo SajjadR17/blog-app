@@ -90,6 +90,7 @@
   text-align: justify;
   text-align-last: left;
   hyphens: auto;
+  font-size: var(--fs-excerpt);
   color: var(--text-primary);
 }
 

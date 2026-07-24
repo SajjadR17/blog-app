@@ -1,38 +1,44 @@
-import { BiCalendar, BiUser } from "react-icons/bi";
+import { BiCalendar, BiTrash, BiUser } from "react-icons/bi";
 import { useAuth } from "../../contexts/AuthContext";
 import "../../styles/profileHeader.css";
 import { logout } from "../../lib/auth";
 import { useEffect, useRef, useState } from "react";
-import { doc, updateDoc } from "firebase/firestore";
-import { auth, db } from "../../../firebase";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { db } from "../../../firebase";
 import { getCroppedImg } from "../../utils/helpers";
 import ImageCropper from "../ImageCropper";
 import {
+  deleteUser,
   EmailAuthProvider,
   reauthenticateWithCredential,
   verifyBeforeUpdateEmail,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { CgArrowRight } from "react-icons/cg";
 
 function ProfileHeader() {
   const { user, userProfile } = useAuth();
   const navigate = useNavigate();
   const date = userProfile?.createdAt?.toDate();
-  const [username, setUsername] = useState(userProfile?.username || "");
-  const [email, setEmail] = useState(userProfile?.email || "");
-  const [modalOpen, setModalOpen] = useState(false);
-  const [uploading, setUploading] = useState(false);
-  const [info, setInfo] = useState("");
-  const [isSaving, setIsSaving] = useState(false);
-  const [errors, setErrors] = useState({});
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [cropPixels, setCropPixels] = useState(null);
-  const [password, setPassword] = useState("");
   const formattedDate = date?.toLocaleDateString("en-US", {
     month: "short",
     year: "numeric",
   });
   const fileInputRef = useRef(null);
+
+  const [username, setUsername] = useState(userProfile?.username || "");
+  const [email, setEmail] = useState(userProfile?.email || "");
+  const [password, setPassword] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [info, setInfo] = useState("");
+  const [errors, setErrors] = useState({});
+
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [cropPixels, setCropPixels] = useState(null);
+
+  const [uploading, setUploading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     if (userProfile) {
@@ -40,6 +46,18 @@ function ProfileHeader() {
       setEmail(userProfile?.email || "");
     }
   }, [userProfile]);
+
+  useEffect(() => {
+    if (modalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [modalOpen]);
 
   const closeModal = () => {
     setModalOpen(false);
@@ -54,6 +72,7 @@ function ProfileHeader() {
 
   const uploadAvatar = async (file) => {
     setErrors({});
+    setInfo("");
     const formData = new FormData();
 
     formData.append("file", file);
@@ -119,7 +138,7 @@ function ProfileHeader() {
 
       const url = await uploadAvatar(croppedFile);
 
-      await updateDoc(doc(db, "users", auth.currentUser.uid), {
+      await updateDoc(doc(db, "users", user.uid), {
         photoURL: url,
       });
 
@@ -134,7 +153,7 @@ function ProfileHeader() {
 
   const handleRemoveAvatar = async () => {
     try {
-      await updateDoc(doc(db, "users", auth.currentUser.uid), {
+      await updateDoc(doc(db, "users", user.uid), {
         photoURL: "",
       });
     } catch (error) {
@@ -222,6 +241,38 @@ function ProfileHeader() {
     }
   };
 
+  const handelDeleteAccount = async (e) => {
+    e.preventDefault();
+    if (password.length <= 0) {
+      setErrors((prev) => ({ ...prev, passError: "Password required." }));
+      return;
+    }
+    setDeleting(true);
+    setErrors({});
+    setInfo("");
+    try {
+      await reauthenticate(password);
+      await deleteUser(user);
+      await deleteDoc(doc(db, "users", user.uid));
+      navigate("/essays");
+    } catch (err) {
+      switch (err.code) {
+        case "auth/wrong-password":
+        case "auth/invalid-credential":
+          setErrors((prev) => ({ ...prev, passError: "Incorrect password." }));
+          break;
+
+        default:
+          setErrors((prev) => ({
+            ...prev,
+            generalError: "Something went wrong.",
+          }));
+      }
+    } finally {
+      setDeleting(false);
+    }
+  };
+
   const handleDisableBtn = () => {
     const trimmedUsername = username.trim();
     const trimmedEmail = email.trim();
@@ -239,7 +290,7 @@ function ProfileHeader() {
 
     const noChanges = !usernameChanged && !emailChanged;
 
-    const isBusy = isSaving || uploading;
+    const isBusy = isSaving || uploading || deleting;
 
     return (
       isEmpty ||
@@ -249,8 +300,6 @@ function ProfileHeader() {
       isBusy
     );
   };
-
-  const emailChanged = email.trim() !== userProfile?.email;
 
   return (
     <>
@@ -316,9 +365,8 @@ function ProfileHeader() {
           </button>
           <button
             className="logout-profile-btn body"
-            onClick={() => {
-              logout();
-              navigate("/essays");
+            onClick={async () => {
+              await logout().then(navigate("/essays"));
             }}
           >
             Logout
@@ -429,25 +477,30 @@ function ProfileHeader() {
               )}
             </div>
 
-            {emailChanged && (
-              <div className="epm-field">
-                <label htmlFor="password" className="mono">
-                  Current Password
-                </label>
-                <input
-                  id="password"
-                  type="password"
-                  autoComplete="current-password"
-                  className="body"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Confirm your password to change email"
-                />
-                {errors.passError && (
-                  <p className="pass-error mono">{errors.passError}</p>
-                )}
+            <div className="epm-field">
+              <label htmlFor="password" className="mono">
+                Current Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                autoComplete="current-password"
+                className="body"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {errors.passError && (
+                <p className="pass-error mono">{errors.passError}</p>
+              )}
+            </div>
+
+            <div className="delete-acc-container" onClick={handelDeleteAccount}>
+              <div className="delete-acc-container-left">
+                <BiTrash size={17} color="var(--accent2)" />
+                <span>{deleting ? "Deleting..." : "Delete Account"}</span>
               </div>
-            )}
+              <CgArrowRight size={17} color="var(--accent2)" />
+            </div>
 
             <div className="epm-footer">
               <button

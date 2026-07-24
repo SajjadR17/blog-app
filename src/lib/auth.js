@@ -44,11 +44,13 @@ export async function signup(email, password, username) {
     uid: user.uid,
     email: user.email,
     username: username || "New User",
-    shortName: buildShortName(username || "New User"),
+    shortName: buildShortName(username || "NU"),
     role: "user",
-    liked: [],
+    likes: [],
     bookmarks: [],
     followings: [],
+    followers: [],
+    photoURL:"",
     createdAt: serverTimestamp(),
   });
 

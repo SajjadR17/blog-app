@@ -27,7 +27,7 @@ main {
   height: 100vh;
 }
 
-.app-empty-profile{
+.app-empty-profile {
   display: flex;
   align-items: center;
   gap: 30px;
@@ -38,7 +38,7 @@ main {
 }
 
 .app-loading span,
-.app-no-internet-err span{
+.app-no-internet-err span {
   justify-content: center;
 }
 
@@ -94,6 +94,29 @@ main {
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-hover);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 .mono {

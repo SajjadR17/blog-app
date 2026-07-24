@@ -270,6 +270,26 @@
   border-color: var(--accent);
 }
 
+.delete-acc-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background: var(--bg-card);
+  padding: 10px;
+  border-radius: 5px;
+  color: var(--text-secondary);
+  margin: 10px 0;
+  margin-top: 20px;
+}
+
+.delete-acc-container-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
 .epm-footer {
   display: flex;
   gap: 10px;
@@ -290,7 +310,7 @@
 
 .epm-save-btn:disabled,
 .epm-cancel-btn:disabled {
-  background-color: var(--line);
+  background-color: var(--bg-card);
   color: var(--text-primary);
   cursor: not-allowed;
 }
