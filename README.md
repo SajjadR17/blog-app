@@ -1,16 +1,8 @@
 <h1 align="center">✦ Ink & Field - A Minimal Editorial Blog Platform</h1>
 <p align="center">
   <b>A quiet, editorial blog platform built with React, Firebase, and Firestore.</b><br>
-  🌐 <a href="https://ink-field-blog-app.netlify.app/">Live Demo</a> •
+  🌐 <a href="https://ink-field-blog-app.vercel.app/">Live Demo</a> •
   💾 <a href="https://github.com/SajjadR17/ink-field-blog-app.git">GitHub Repository</a>
-</p>
-
----
-
-## 🎨 Preview
-
-<p align="center">
-  <img src="preview.png" alt="Ink & Field UI" width="800"/>
 </p>
 
 ---
@@ -77,7 +69,7 @@ The project was built to practice real-world full-stack React development: Fireb
 
 # 🚀 Live Demo
 
-🔗 https://ink-field-blog-app.netlify.app/
+🔗 https://ink-field-blog-app.vercel.app/
 
 ---
 
