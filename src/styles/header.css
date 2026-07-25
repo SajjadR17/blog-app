@@ -1,13 +1,12 @@
 .nav {
   display: flex;
-  background-color: transparent;
+  background-color: var(--bg-primary);
   border-bottom: 1px solid var(--border);
   justify-content: space-between;
   align-items: center;
   height: 70px;
   padding: 15px 20px;
   user-select: none;
-  backdrop-filter: blur(12px);
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
 }
 
@@ -41,15 +40,13 @@
 }
 
 .user-icon,
-.menu-icon,
-.theme-icon {
+.menu-icon {
   transition: all 0.2s ease;
   color: var(--text-secondary);
 }
 
 .user-icon:hover,
-.menu-icon:hover,
-.theme-icon:hover {
+.menu-icon:hover {
   color: var(--text-primary);
 }
 
@@ -132,14 +129,6 @@
   font-size: 14px;
   gap: 15px;
   transition: all 0.2s ease;
-}
-
-.menu-link.active {
-  background-color: var(--bg-card);
-}
-
-.menu-link:last-child {
-  border-top: none;
 }
 
 .menu-link:hover {

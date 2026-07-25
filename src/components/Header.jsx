@@ -4,7 +4,6 @@ import "../styles/header.css";
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { logout } from "../lib/auth";
-import { useTheme } from "../contexts/ThemeContext";
 import {
   LuBadgeCheck,
   LuBookOpen,
@@ -20,7 +19,6 @@ import {
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { user, userProfile } = useAuth();
-  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   return (
@@ -53,21 +51,6 @@ function Header() {
           </div>
           <div className="nav-right">
             <>
-              {theme === "light" ? (
-                <BiMoon
-                  size={20}
-                  cursor={"pointer"}
-                  onClick={toggleTheme}
-                  className="theme-icon"
-                />
-              ) : (
-                <BiSun
-                  size={20}
-                  cursor={"pointer"}
-                  onClick={toggleTheme}
-                  className="theme-icon"
-                />
-              )}
               <BiUser
                 className="user-icon"
                 onClick={

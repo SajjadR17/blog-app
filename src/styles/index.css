@@ -27,16 +27,6 @@ main {
   height: 100vh;
 }
 
-.app-empty-profile {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  height: 80vh;
-}
-
 .app-loading span,
 .app-no-internet-err span {
   justify-content: center;
@@ -59,64 +49,26 @@ main {
   --font-body: "Source Serif 4", Georgia, serif;
   --font-mono: "IBM Plex Mono", monospace;
 
-  --fs-h2: 21px;
-  --fs-body: 18px;
+  --fs-body: 16px;
   --fs-excerpt: 15px;
   --fs-meta: 11.5px;
   --fs-eyebrow: 11.5px;
 
-  --lh-body: 1.5;
+  --lh-body: 1.7;
   --lh-heading: 1.15;
 
   --container-width: 1200px;
 }
 
-[data-theme="dark"] {
-  --border: #3a362f;
-  --bg-primary: #1c1a17;
-  --bg-card: #2a2722;
-  --text-primary: #ede9e1;
-  --text-secondary: #a8a296;
-  --accent: #779469;
-  --accent-rgb: 143, 179, 128;
-  --accent-hover: #87a478;
-  --accent2: #c68b5c;
-  --accent2-hover: rgb(189, 153, 123);
-  --line: #3a362f;
-}
-
 .display {
   font-family: var(--font-display);
+  line-height: var(--lh-heading);
 }
 
 .body {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  transition: all 0.3s ease;
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-hover);
-}
-
-::-webkit-scrollbar-corner {
-  background: transparent;
 }
 
 .mono {

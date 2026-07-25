@@ -41,11 +41,6 @@ function About() {
           state management, the small decisions that make software easier or
           harder to live with later.
         </span>
-        <span>
-          There's no comments section here on purpose. Not because disagreement
-          is unwelcome, but because a piece of writing deserves to exist for a
-          moment before it's argued with.
-        </span>
         <span>Written by Sajjad Roohandeh</span>
       </div>
     </>

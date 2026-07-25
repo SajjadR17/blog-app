@@ -1,7 +1,7 @@
 .essay {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 }
 
 .back-btn {
@@ -20,6 +20,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 15px;
 }
 
 .follow-author-btn {
@@ -58,7 +59,7 @@
   height: 40px;
   display: flex;
   background-color: var(--accent);
-  color: #fff;
+  color: var(--bg-primary);
   align-items: center;
   justify-content: center;
   border-radius: 50%;
@@ -92,6 +93,7 @@
   hyphens: auto;
   font-size: var(--fs-excerpt);
   color: var(--text-primary);
+  margin-bottom: 10px;
 }
 
 .essay-bottom {
@@ -114,7 +116,7 @@
   border-radius: 5px;
   border: 1px solid var(--border);
   background-color: var(--bg-card);
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .essay-intractions {
@@ -123,6 +125,7 @@
   align-items: center;
   padding: 20px 0;
   margin-top: 10px;
+  font-size: 15px;
   border-top: 1px solid var(--border);
 }
 

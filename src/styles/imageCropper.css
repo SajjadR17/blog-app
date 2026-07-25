@@ -8,7 +8,6 @@
   z-index: 9999;
 }
 
-
 .crop-modal {
   width: min(90vw, 420px);
   background: #111;
@@ -19,7 +18,6 @@
   gap: 18px;
 }
 
-
 .crop-container {
   position: relative;
   width: 100%;
@@ -29,12 +27,9 @@
   border-radius: 12px;
 }
 
-
-/* react-easy-crop خودش position absolute دارد */
 .crop-container .reactEasyCrop_Container {
   border-radius: 12px;
 }
-
 
 .crop-controls {
   display: flex;
@@ -42,26 +37,21 @@
   gap: 10px;
 }
 
-
 .crop-controls label {
   font-size: 14px;
   color: #aaa;
 }
-
 
 .crop-controls input[type="range"] {
   width: 100%;
   cursor: pointer;
 }
 
-
-
 .crop-actions {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
 }
-
 
 .crop-btn {
   border: none;
@@ -73,13 +63,11 @@
   color: #111;
 }
 
-
 .crop-btn.cancel {
   background: transparent;
   border: 1px solid #333;
   color: #aaa;
 }
-
 
 .crop-btn:hover {
   opacity: 0.85;
