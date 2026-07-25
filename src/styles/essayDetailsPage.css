@@ -94,6 +94,7 @@
   font-size: var(--fs-excerpt);
   color: var(--text-primary);
   margin-bottom: 10px;
+  line-height: var(--lh-body);
 }
 
 .essay-bottom {

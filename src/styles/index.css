@@ -54,7 +54,7 @@ main {
   --fs-meta: 11.5px;
   --fs-eyebrow: 11.5px;
 
-  --lh-body: 1.7;
+  --lh-body: 1.6;
   --lh-heading: 1.15;
 
   --container-width: 1200px;
@@ -68,7 +68,6 @@ main {
 .body {
   font-family: var(--font-body);
   font-size: var(--fs-body);
-  line-height: var(--lh-body);
 }
 
 .mono {

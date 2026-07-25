@@ -38,6 +38,7 @@
   text-align: justify;
   text-align-last: left;
   hyphens: auto;
+  line-height: var(--lh-body);
   font-size: var(--fs-excerpt);
 }
 
