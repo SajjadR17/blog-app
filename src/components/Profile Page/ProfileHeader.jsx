@@ -48,24 +48,13 @@ function ProfileHeader() {
 
                 <p className="devider">·</p>
 
-                <span>Member since {formattedDate}</span>
+                <span className="profile-user-account-createdAt">
+                  Member since {formattedDate}
+                </span>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="mobile-profile-details">
-          <span className="mobile-profile-user-acc-createdAt">
-            <BiCalendar />
-            Member since {formattedDate}
-          </span>
-
-          <span className="mobile-profile-user-role">
-            <BiUser />
-            {userProfile?.role}
-          </span>
-        </div>
-
         <div className="profile-action-btns">
           <button
             className="edit-profile-btn body"

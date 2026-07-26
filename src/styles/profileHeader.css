@@ -103,20 +103,6 @@
   border-color: var(--accent2);
 }
 
-.mobile-profile-details {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  padding: 10px 0;
-}
-
-.mobile-profile-details span {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 14px;
-}
-
 .edit-profile-modal {
   position: relative;
 }
@@ -320,11 +306,7 @@
   .profile-header {
     flex-direction: column;
     align-items: normal;
-    gap: 20px;
-  }
-
-  .mobile-profile-details {
-    display: flex;
+    gap: 40px;
   }
 
   .profile-name {
