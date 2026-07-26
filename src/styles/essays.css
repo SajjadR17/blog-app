@@ -40,7 +40,7 @@
 }
 
 .essay-title {
-  font-size: var(--fs-h2);
+  font-size: 1.3rem;
   white-space: nowrap;
   overflow-x: auto;
   scrollbar-width: none;

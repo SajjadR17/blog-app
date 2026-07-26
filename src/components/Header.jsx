@@ -126,7 +126,7 @@ function Header() {
                 NEW POST
               </NavLink>
             )}
-            {user && (
+            {user && userProfile && (
               <Link
                 to={"/essays"}
                 onClick={() => {
@@ -140,7 +140,7 @@ function Header() {
               </Link>
             )}
           </div>
-          {user && (
+          {user && userProfile && (
             <div
               className="menu-profile-card"
               onClick={() => {
@@ -149,19 +149,18 @@ function Header() {
               }}
             >
               <div className="menu-profile-avatar">
-                {userProfile?.photoURL
-                  ? <img src={`${userProfile?.photoURL}`} className="menu-profile-img" />
-                  : userProfile?.shortName
-                    ? userProfile?.shortName
-                    : "UR"}
+                {userProfile?.photoURL ? (
+                  <img
+                    src={`${userProfile?.photoURL}`}
+                    className="menu-profile-img"
+                  />
+                ) : (
+                  userProfile?.shortName
+                )}
               </div>
               <div className="profile-info">
-                <span className="username">
-                  {userProfile?.username ? userProfile?.username : "User"}
-                </span>
-                <span className="userRole">
-                  {userProfile?.role ? userProfile?.role : "user"}
-                </span>
+                <span className="username">{userProfile?.username}</span>
+                <span className="userRole">{userProfile?.role}</span>
               </div>
             </div>
           )}

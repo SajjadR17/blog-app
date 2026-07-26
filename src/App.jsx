@@ -8,10 +8,12 @@ import EssayDetailsPage from "./pages/EssayDetailsPage";
 import AddBlog from "./pages/AddBlog";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <>
+      <ScrollToTop />
       <Header />
       <main className="container">
         <Routes>

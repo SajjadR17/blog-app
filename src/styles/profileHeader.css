@@ -92,6 +92,7 @@
   border: 1px solid var(--border);
   background-color: transparent;
   color: var(--text-primary);
+  transition: all 0.2s ease;
   font-size: 14px;
 }
 
