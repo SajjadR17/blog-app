@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { getLikedPosts } from "../../utils/helpers";
-import "../../styles/likedTab.css";
+import "../../styles/profileTab.css";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import { BiSad } from "react-icons/bi";
@@ -10,11 +10,12 @@ import { db } from "../../../firebase";
 
 function LikedTab() {
   const { user, userProfile } = useAuth();
-  const [likedPosts, setLikedPosts] = useState(null);
+  const [likedPosts, setLikedPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!userProfile?.likes) return;
     const fetchLiked = async () => {
       if (!userProfile?.likes || userProfile.likes.length === 0) {
         setLikedPosts([]);
@@ -65,20 +66,20 @@ function LikedTab() {
       {likedPosts.map((post) => (
         <div
           className="profile-post-row"
-          onClick={() => navigate(`/essay/${post.slug}`)}
-          key={post.id}
+          onClick={() => navigate(`/essay/${post?.slug}`)}
+          key={post?.id}
         >
           <div className="profile-post-main">
-            <span className="profile-post-eyebrow mono">{post.category}</span>
-            <div className="profile-post-title display">{post.title}</div>
+            <span className="profile-post-eyebrow mono">{post?.category}</span>
+            <div className="profile-post-title display">{post?.title}</div>
             <span className="profile-post-meta mono">
-              {post.date} · {post.readMins} min read
+              {post?.date} · {post?.readMins} min read
             </span>
           </div>
           <div className="post-action-btns">
             <button
               className="delete-profile-liked-post"
-              onClick={(e) => deleteLikedPostHandler(e, post.slug)}
+              onClick={(e) => deleteLikedPostHandler(e, post?.slug)}
             >
               ✕
             </button>

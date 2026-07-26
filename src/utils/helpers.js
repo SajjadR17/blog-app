@@ -1,4 +1,12 @@
-import { doc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "../../firebase";
 
 export async function getLikedPosts(likedSlugs) {
@@ -9,6 +17,21 @@ export async function getLikedPosts(likedSlugs) {
     .filter((snap) => snap.exists())
     .map((snap) => ({ id: snap.id, ...snap.data() }));
 }
+
+export const getUserPublishedPosts = async (authorId) => {
+  const q = query(
+    collection(db, "posts"),
+    where("authorUid", "==", authorId),
+    orderBy("date", "desc"),
+  );
+
+  const snapshot = await getDocs(q);
+
+  return snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+};
 
 export async function getBookmarkedPosts(bookmarkedSlugs) {
   const promises = bookmarkedSlugs.map((slug) =>

@@ -9,11 +9,12 @@ import { db } from "../../../firebase";
 
 function BookmarkedTab() {
   const { user, userProfile } = useAuth();
-  const [bookmarkedPosts, setBookmarkedPosts] = useState(null);
+  const [bookmarkedPosts, setBookmarkedPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!userProfile?.bookmarks) return;
     const fetchBookmarked = async () => {
       if (!userProfile?.bookmarks || userProfile.bookmarks.length === 0) {
         setBookmarkedPosts([]);
@@ -64,20 +65,20 @@ function BookmarkedTab() {
       {bookmarkedPosts.map((post) => (
         <div
           className="profile-post-row"
-          onClick={() => navigate(`/essay/${post.slug}`)}
-          key={post.id}
+          onClick={() => navigate(`/essay/${post?.slug}`)}
+          key={post?.id}
         >
           <div className="profile-post-main">
-            <span className="profile-post-eyebrow mono">{post.category}</span>
-            <div className="profile-post-title display">{post.title}</div>
+            <span className="profile-post-eyebrow mono">{post?.category}</span>
+            <div className="profile-post-title display">{post?.title}</div>
             <span className="profile-post-meta mono">
-              {post.date} · {post.readMins} min read
+              {post?.date} · {post?.readMins} min read
             </span>
           </div>
           <div className="post-action-btns">
             <button
               className="delete-profile-bookmarked-post"
-              onClick={(e) => deleteBookmarkedPostHandler(e, post.slug)}
+              onClick={(e) => deleteBookmarkedPostHandler(e, post?.slug)}
             >
               ✕
             </button>

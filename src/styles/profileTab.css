@@ -38,7 +38,9 @@
 .profile-likes-loading,
 .profile-empty-likes,
 .profile-empty-bookmarks,
-.profile-bookmarks-loading {
+.profile-bookmarks-loading,
+.profile-empty-published-posts,
+.profile-published-posts-loading {
   display: flex;
   align-items: center;
   gap: 30px;
@@ -49,10 +51,18 @@
   height: 500px;
 }
 
-.delete-profile-liked-post,
-.delete-profile-bookmarked-post {
+.post-action-btns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.post-action-btns button {
   width: 30px;
   height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: transparent;
   border: 1px solid var(--border);
   border-radius: 50%;
@@ -61,8 +71,7 @@
   color: var(--text-secondary);
 }
 
-.delete-profile-liked-post:hover,
-.delete-profile-bookmarked-post:hover {
+.post-action-btns button:hover {
   border-color: var(--accent2);
   color: var(--accent2);
   background-color: var(--bg-card);
@@ -70,6 +79,6 @@
 
 @media (max-width: 767px) {
   .profile-post-title {
-    max-width: 240px;
+    max-width: 210px;
   }
 }

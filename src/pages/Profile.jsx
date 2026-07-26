@@ -4,6 +4,7 @@ import ProfileStats from "../components/Profile Page/ProfileStats";
 import "../styles/profile.css";
 import LikedTab from "../components/Profile Page/LikedTab";
 import BookmarkedTab from "../components/Profile Page/BookmarkedTab";
+import PostsTab from "../components/Profile Page/PostsTab";
 import { useAuth } from "../contexts/AuthContext";
 import { BiSad, BiTrash } from "react-icons/bi";
 import { FiDelete } from "react-icons/fi";
@@ -38,8 +39,16 @@ function Profile() {
         >
           BOOKMARKES
         </div>
+        <div
+          className={`profile-tab mono ${openTab === "posts" ? "active" : null}`}
+          onClick={() => setOpenTab("posts")}
+        >
+          POSTS
+        </div>
       </div>
-      {openTab === "liked" ? <LikedTab /> : <BookmarkedTab />}
+      {openTab === "liked" && <LikedTab />}
+      {openTab === "bookmarked" && <BookmarkedTab />}
+      {openTab === "posts" && <PostsTab />}
     </>
   );
 }
