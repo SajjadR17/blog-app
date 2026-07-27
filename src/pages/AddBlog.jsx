@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "../styles/addBlog.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { ClipLoader } from "react-spinners";
 
@@ -105,50 +105,57 @@ function AddBlog() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     setSaving(true);
+    setError("");
 
     if (
-      excerptValue.length === 0 ||
-      textValue.length === 0 ||
-      titleValue.length === 0 ||
-      categoryValue.length === 0 ||
-      readMinsValue.length === 0 ||
-      tagsValue.length === 0
+      !titleValue.trim() ||
+      !excerptValue.trim() ||
+      !textValue.trim() ||
+      !categoryValue.trim() ||
+      !readMinsValue.trim() ||
+      parsedTags.length === 0
     ) {
       setError("Please fill in all fields.");
       setSaving(false);
       return;
     }
 
-    const existingDoc = await getDoc(doc(db, "posts", slugValue));
-    if (existingDoc.exists()) {
-      setError(
-        "A post with this slug already exists. Please choose a different title.",
-      );
-      setSaving(false);
-      return;
-    }
-
     try {
-      await setDoc(doc(db, "posts", slugValue), {
-        title: titleValue,
+      const slugQuery = query(
+        collection(db, "posts"),
+        where("slug", "==", slugValue),
+      );
+
+      const slugSnapshot = await getDocs(slugQuery);
+
+      if (!slugSnapshot.empty) {
+        setError(
+          "A post with this slug already exists. Please choose a different title.",
+        );
+        setSaving(false);
+        return;
+      }
+
+      await addDoc(collection(db, "posts"), {
+        title: titleValue.trim(),
         slug: slugValue,
-        excerpt: excerptValue,
-        body: textValue,
+        excerpt: excerptValue.trim(),
+        body: textValue.trim(),
         authorUid: auth.currentUser.uid,
-        category: categoryValue,
+        category: categoryValue.trim(),
         tags: parsedTags,
         likes: 0,
         bookmarks: 0,
         readMins: Number(readMinsValue),
-        date: date,
-        id: crypto.randomUUID(),
+        date,
       });
 
       clearDraft();
       navigate("/essays");
     } catch (err) {
-      console.log(err);
+      console.error(err);
       setError("Something went wrong, please try again.");
     } finally {
       setSaving(false);

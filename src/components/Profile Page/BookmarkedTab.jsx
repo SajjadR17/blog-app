@@ -14,31 +14,45 @@ function BookmarkedTab() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!userProfile?.bookmarks) return;
     const fetchBookmarked = async () => {
-      if (!userProfile?.bookmarks || userProfile.bookmarks.length === 0) {
+      if (!userProfile?.bookmarks?.length) {
         setBookmarkedPosts([]);
         setLoading(false);
         return;
       }
-      setLoading(true);
-      const posts = await getBookmarkedPosts(userProfile.bookmarks);
-      setBookmarkedPosts(posts);
-      setLoading(false);
+
+      try {
+        setLoading(true);
+
+        const posts = await getBookmarkedPosts(userProfile.bookmarks);
+
+        setBookmarkedPosts(posts);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
     };
+
     fetchBookmarked();
   }, [userProfile]);
 
-  const deleteBookmarkedPostHandler = async (e, slug) => {
+  const deleteBookmarkedPostHandler = async (e, postId) => {
     e.stopPropagation();
+
     try {
       const userRef = doc(db, "users", user.uid);
-      const postRef = doc(db, "posts", slug);
+      const postRef = doc(db, "posts", postId);
 
       const batch = writeBatch(db);
 
-      batch.update(userRef, { bookmarks: arrayRemove(slug) });
-      batch.update(postRef, { bookmarks: increment(-1) });
+      batch.update(userRef, {
+        bookmarks: arrayRemove(postId),
+      });
+
+      batch.update(postRef, {
+        bookmarks: increment(-1),
+      });
 
       await batch.commit();
     } catch (err) {
@@ -46,39 +60,46 @@ function BookmarkedTab() {
     }
   };
 
-  if (loading)
+  if (loading) {
     return (
       <div className="profile-bookmarks-loading mono">
-        <ClipLoader color="var(--accent)" size={25} /> LOADING BOOKMARKES
+        <ClipLoader color="var(--accent)" size={25} />
+        LOADING BOOKMARKS
       </div>
     );
-  if (bookmarkedPosts.length === 0)
+  }
+
+  if (bookmarkedPosts.length === 0) {
     return (
       <p className="profile-empty-bookmarks mono">
         <BiSad size={40} />
         NO BOOKMARKED POSTS YET
       </p>
     );
+  }
 
   return (
     <div className="profile-post-list">
       {bookmarkedPosts.map((post) => (
         <div
           className="profile-post-row"
-          onClick={() => navigate(`/essay/${post?.slug}`)}
-          key={post?.id}
+          key={post.id}
+          onClick={() => navigate(`/essay/${post.slug}`)}
         >
           <div className="profile-post-main">
-            <span className="profile-post-eyebrow mono">{post?.category}</span>
-            <div className="profile-post-title display">{post?.title}</div>
+            <span className="profile-post-eyebrow mono">{post.category}</span>
+
+            <div className="profile-post-title display">{post.title}</div>
+
             <span className="profile-post-meta mono">
-              {post?.date} · {post?.readMins} min read
+              {post.date} · {post.readMins} min read
             </span>
           </div>
+
           <div className="post-action-btns">
             <button
               className="delete-profile-bookmarked-post"
-              onClick={(e) => deleteBookmarkedPostHandler(e, post?.slug)}
+              onClick={(e) => deleteBookmarkedPostHandler(e, post.id)}
             >
               ✕
             </button>

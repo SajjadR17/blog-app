@@ -9,6 +9,8 @@ import AddBlog from "./pages/AddBlog";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import ScrollToTop from "./components/ScrollToTop";
+import EssayEditPage from "./pages/EssayEditPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
         <Routes>
           <Route element={<Navigate to={"/essays"} replace />} path="/" />
           <Route element={<EssayDetailsPage />} path="/essay/:slug" />
+          <Route element={<EssayEditPage />} path="/essay/edit/:slug" />
           <Route element={<Essays />} path="/essays" />
           <Route element={<Journal />} path="/journal" />
           <Route element={<About />} path="/about" />
@@ -26,6 +29,8 @@ function App() {
           <Route element={<Signup />} path="/signup" />
           <Route element={<AddBlog />} path="/add-blog" />
           <Route element={<Profile />} path="/profile" />
+          <Route path="/404" element={<NotFoundPage />} />
+          <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>
       </main>
     </>

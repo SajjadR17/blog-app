@@ -9,20 +9,41 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase";
 
-export async function getLikedPosts(likedSlugs) {
-  const promises = likedSlugs.map((slug) => getDoc(doc(db, "posts", slug)));
+export async function getLikedPosts(likedPostIds) {
+  const promises = likedPostIds.map((postId) =>
+    getDoc(doc(db, "posts", postId))
+  );
+
   const snapshots = await Promise.all(promises);
 
   return snapshots
     .filter((snap) => snap.exists())
-    .map((snap) => ({ id: snap.id, ...snap.data() }));
+    .map((snap) => ({
+      id: snap.id,
+      ...snap.data(),
+    }));
+}
+
+export async function getBookmarkedPosts(bookmarkedPostIds) {
+  const promises = bookmarkedPostIds.map((postId) =>
+    getDoc(doc(db, "posts", postId))
+  );
+
+  const snapshots = await Promise.all(promises);
+
+  return snapshots
+    .filter((snap) => snap.exists())
+    .map((snap) => ({
+      id: snap.id,
+      ...snap.data(),
+    }));
 }
 
 export const getUserPublishedPosts = async (authorId) => {
   const q = query(
     collection(db, "posts"),
     where("authorUid", "==", authorId),
-    orderBy("date", "desc"),
+    orderBy("date", "desc")
   );
 
   const snapshot = await getDocs(q);
@@ -33,17 +54,6 @@ export const getUserPublishedPosts = async (authorId) => {
   }));
 };
 
-export async function getBookmarkedPosts(bookmarkedSlugs) {
-  const promises = bookmarkedSlugs.map((slug) =>
-    getDoc(doc(db, "posts", slug)),
-  );
-  const snapshots = await Promise.all(promises);
-
-  return snapshots
-    .filter((snap) => snap.exists())
-    .map((snap) => ({ id: snap.id, ...snap.data() }));
-}
-
 export const getCroppedImg = (imageSrc, pixelCrop) => {
   return new Promise((resolve) => {
     const image = new Image();
@@ -52,11 +62,9 @@ export const getCroppedImg = (imageSrc, pixelCrop) => {
 
     image.onload = () => {
       const canvas = document.createElement("canvas");
-
       const ctx = canvas.getContext("2d");
 
       canvas.width = pixelCrop.width;
-
       canvas.height = pixelCrop.height;
 
       ctx.drawImage(
@@ -68,7 +76,7 @@ export const getCroppedImg = (imageSrc, pixelCrop) => {
         0,
         0,
         pixelCrop.width,
-        pixelCrop.height,
+        pixelCrop.height
       );
 
       canvas.toBlob((blob) => {

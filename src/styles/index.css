@@ -32,6 +32,35 @@ main {
   justify-content: center;
 }
 
+.page-not-found-err-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 80vh;
+  gap: 30px;
+  color: var(--text-secondary);
+}
+
+.page-not-found-err-container img {
+  width: 340px;
+}
+
+.page-not-found-err-container button{
+  background-color: var(--accent);
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+  width: 320px;
+}
+
+.page-not-found-err-container button:hover{
+  background-color: var(--accent-hover);
+}
+
 :root {
   --border: #dedacb;
   --bg-primary: #faf8f4;

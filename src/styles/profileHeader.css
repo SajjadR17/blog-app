@@ -299,7 +299,6 @@
 .epm-cancel-btn:disabled {
   background-color: var(--bg-card);
   color: var(--text-primary);
-  cursor: not-allowed;
 }
 
 @media (max-width: 767px) {

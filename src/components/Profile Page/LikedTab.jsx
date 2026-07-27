@@ -15,31 +15,45 @@ function LikedTab() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!userProfile?.likes) return;
     const fetchLiked = async () => {
-      if (!userProfile?.likes || userProfile.likes.length === 0) {
+      if (!userProfile?.likes?.length) {
         setLikedPosts([]);
         setLoading(false);
         return;
       }
-      setLoading(true);
-      const posts = await getLikedPosts(userProfile.likes);
-      setLikedPosts(posts);
-      setLoading(false);
+
+      try {
+        setLoading(true);
+
+        const posts = await getLikedPosts(userProfile.likes);
+
+        setLikedPosts(posts);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
     };
+
     fetchLiked();
   }, [userProfile]);
 
-  const deleteLikedPostHandler = async (e, slug) => {
+  const deleteLikedPostHandler = async (e, postId) => {
     e.stopPropagation();
+
     try {
       const userRef = doc(db, "users", user.uid);
-      const postRef = doc(db, "posts", slug);
+      const postRef = doc(db, "posts", postId);
 
       const batch = writeBatch(db);
 
-      batch.update(userRef, { likes: arrayRemove(slug) });
-      batch.update(postRef, { likes: increment(-1) });
+      batch.update(userRef, {
+        likes: arrayRemove(postId),
+      });
+
+      batch.update(postRef, {
+        likes: increment(-1),
+      });
 
       await batch.commit();
     } catch (err) {
@@ -47,39 +61,46 @@ function LikedTab() {
     }
   };
 
-  if (loading)
+  if (loading) {
     return (
       <div className="profile-likes-loading mono">
-        <ClipLoader color="var(--accent)" size={25} /> LOADING LIKES
+        <ClipLoader color="var(--accent)" size={25} />
+        LOADING LIKES
       </div>
     );
-  if (likedPosts.length === 0)
+  }
+
+  if (likedPosts.length === 0) {
     return (
       <p className="profile-empty-likes mono">
         <BiSad size={40} />
         NO LIKED POSTS YET
       </p>
     );
+  }
 
   return (
     <div className="profile-post-list">
       {likedPosts.map((post) => (
         <div
           className="profile-post-row"
-          onClick={() => navigate(`/essay/${post?.slug}`)}
-          key={post?.id}
+          key={post.id}
+          onClick={() => navigate(`/essay/${post.slug}`)}
         >
           <div className="profile-post-main">
-            <span className="profile-post-eyebrow mono">{post?.category}</span>
-            <div className="profile-post-title display">{post?.title}</div>
+            <span className="profile-post-eyebrow mono">{post.category}</span>
+
+            <div className="profile-post-title display">{post.title}</div>
+
             <span className="profile-post-meta mono">
-              {post?.date} · {post?.readMins} min read
+              {post.date} · {post.readMins} min read
             </span>
           </div>
+
           <div className="post-action-btns">
             <button
               className="delete-profile-liked-post"
-              onClick={(e) => deleteLikedPostHandler(e, post?.slug)}
+              onClick={(e) => deleteLikedPostHandler(e, post.id)}
             >
               ✕
             </button>

@@ -39,16 +39,18 @@ function Profile() {
         >
           BOOKMARKES
         </div>
-        <div
-          className={`profile-tab mono ${openTab === "posts" ? "active" : null}`}
-          onClick={() => setOpenTab("posts")}
-        >
-          POSTS
-        </div>
+        {userProfile?.role === "admin" && (
+          <div
+            className={`profile-tab mono ${openTab === "posts" ? "active" : null}`}
+            onClick={() => setOpenTab("posts")}
+          >
+            POSTS
+          </div>
+        )}
       </div>
       {openTab === "liked" && <LikedTab />}
       {openTab === "bookmarked" && <BookmarkedTab />}
-      {openTab === "posts" && <PostsTab />}
+      {openTab === "posts" && userProfile.role === "admin" && <PostsTab />}
     </>
   );
 }

@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import {
   arrayRemove,
   arrayUnion,
+  collection,
   doc,
-  getDoc,
   increment,
   onSnapshot,
+  query,
+  where,
   writeBatch,
 } from "firebase/firestore";
 import { auth, db } from "../../firebase";
@@ -32,22 +34,26 @@ function EssayDetailsPage() {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
   const { user, userProfile } = useAuth();
-  const isLiked = userProfile?.likes?.includes(essayDetails?.slug) || false;
+  const isLiked = userProfile?.likes?.includes(essayDetails?.id) || false;
   const isBookmarked =
-    userProfile?.bookmarks?.includes(essayDetails?.slug) || false;
+    userProfile?.bookmarks?.includes(essayDetails?.id) || false;
 
   useEffect(() => {
-    const docRef = doc(db, "posts", slug);
+    const q = query(collection(db, "posts"), where("slug", "==", slug));
 
-    const unsubscribe = onSnapshot(docRef, (docSnap) => {
-      if (docSnap.exists()) {
-        setEssayDetails({
-          id: docSnap.id,
-          ...docSnap.data(),
-        });
-      } else {
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      if (snapshot.empty) {
         setError(true);
+        setLoading(false);
+        return;
       }
+
+      const docSnap = snapshot.docs[0];
+
+      setEssayDetails({
+        id: docSnap.id,
+        ...docSnap.data(),
+      });
 
       setLoading(false);
     });
@@ -56,21 +62,17 @@ function EssayDetailsPage() {
   }, [slug]);
 
   useEffect(() => {
-    const getAuthorDetails = async () => {
-      try {
-        if (!essayDetails) {
-          return;
-        }
-        const ref = doc(db, "users", essayDetails?.authorUid);
-        const snap = await getDoc(ref);
-        setAuthorDetails(snap.data());
-      } catch (err) {
-        console.log(err);
-      }
-    };
+    if (!essayDetails?.authorUid) return;
 
-    getAuthorDetails();
-  }, [essayDetails?.authorUid, essayDetails]);
+    const unsubscribe = onSnapshot(
+      doc(db, "users", essayDetails.authorUid),
+      (snap) => {
+        setAuthorDetails(snap.data());
+      },
+    );
+
+    return unsubscribe;
+  }, [essayDetails?.authorUid]);
 
   const toggleLike = async () => {
     const user = auth.currentUser;
@@ -79,15 +81,15 @@ function EssayDetailsPage() {
       return;
     }
     const userRef = doc(db, "users", user.uid);
-    const postRef = doc(db, "posts", essayDetails.slug);
+    const postRef = doc(db, "posts", essayDetails.id);
 
     const batch = writeBatch(db);
 
     if (isLiked) {
-      batch.update(userRef, { likes: arrayRemove(essayDetails.slug) });
+      batch.update(userRef, { likes: arrayRemove(essayDetails.id) });
       batch.update(postRef, { likes: increment(-1) });
     } else {
-      batch.update(userRef, { likes: arrayUnion(essayDetails.slug) });
+      batch.update(userRef, { likes: arrayUnion(essayDetails.id) });
       batch.update(postRef, { likes: increment(1) });
     }
 
@@ -102,15 +104,15 @@ function EssayDetailsPage() {
     }
 
     const userRef = doc(db, "users", user.uid);
-    const postRef = doc(db, "posts", essayDetails.slug);
+    const postRef = doc(db, "posts", essayDetails.id);
 
     const batch = writeBatch(db);
 
     if (isBookmarked) {
-      batch.update(userRef, { bookmarks: arrayRemove(essayDetails.slug) });
+      batch.update(userRef, { bookmarks: arrayRemove(essayDetails.id) });
       batch.update(postRef, { bookmarks: increment(-1) });
     } else {
-      batch.update(userRef, { bookmarks: arrayUnion(essayDetails.slug) });
+      batch.update(userRef, { bookmarks: arrayUnion(essayDetails.id) });
       batch.update(postRef, { bookmarks: increment(1) });
     }
 
