@@ -19,7 +19,7 @@ function App() {
       <Header />
       <main className="container">
         <Routes>
-          <Route element={<Navigate to={"/essays"} replace />} path="/" />
+          <Route element={<Navigate to="/essays" replace />} path="/" />
           <Route element={<EssayDetailsPage />} path="/essay/:slug" />
           <Route element={<EssayEditPage />} path="/essay/edit/:slug" />
           <Route element={<Essays />} path="/essays" />
@@ -29,8 +29,8 @@ function App() {
           <Route element={<Signup />} path="/signup" />
           <Route element={<AddBlog />} path="/add-blog" />
           <Route element={<Profile />} path="/profile" />
-          <Route path="/404" element={<NotFoundPage />} />
-          <Route path="*" element={<Navigate to="/404" replace />} />
+          <Route element={<NotFoundPage />} path="/404" />
+          <Route element={<Navigate to="/404" replace />} path="*" />
         </Routes>
       </main>
     </>
